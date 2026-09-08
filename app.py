@@ -20,7 +20,7 @@ def download_video():
 
     ydl_opts = {
         'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s',
-        'ffmpeg_location': '.', 
+        'ffmpeg_location': './ffmpeg_bin/bin',
         'noplaylist': True,
     }
 
