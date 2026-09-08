@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexLoad - Fast, Free, No-Ads Downloader</title>
+    <!-- CSS Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root { --primary: #00f2fe; --secondary: #4facfe; --accent: #ff416c; }
+        body { 
+            background: #050505; 
+            color: white; 
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            overflow-x: hidden;
+        }
+        /* Background Animated Circles */
+        .circle { position: absolute; border-radius: 50%; background: linear-gradient(45deg, var(--primary), var(--secondary)); filter: blur(80px); z-index: -1; opacity: 0.2; animation: float 10s infinite alternate; }
+        @keyframes float { from { transform: translate(0,0); } to { transform: translate(50px, 100px); } }
+
+        .card { 
+            background: rgba(20, 20, 20, 0.8); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 30px; padding: 50px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            max-width: 600px; width: 100%;
+        }
+        .logo-text { font-size: 3rem; font-weight: 900; letter-spacing: -2px; background: linear-gradient(to right, #00f2fe, #4facfe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 5px; }
+        .tagline { color: #aaa; font-size: 0.9rem; margin-bottom: 30px; letter-spacing: 1px; }
+        
+        .feature-badge { background: rgba(255, 65, 108, 0.1); color: #ff416c; padding: 5px 15px; border-radius: 50px; font-size: 0.7rem; font-weight: bold; margin-bottom: 20px; display: inline-block; border: 1px solid rgba(255, 65, 108, 0.3); }
+
+        .form-control, .form-select { 
+            background: #1a1a1a !important; border: 1px solid #333 !important; color: white !important; 
+            padding: 15px; border-radius: 15px; margin-bottom: 15px;
+        }
+        /* Fix visibility of Dropdown Options */
+        option { background: #1a1a1a; color: white; padding: 10px; }
+
+        .btn-download { 
+            background: linear-gradient(45deg, #ff416c, #ff4b2b); border: none; color: white; 
+            padding: 18px; border-radius: 15px; font-weight: 800; width: 100%;
+            transition: 0.4s; text-transform: uppercase;
+        }
+        .btn-download:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,65,108,0.5); }
+        
+        #status-area { display: none; margin-top: 30px; }
+        .loader-ring { border: 4px solid #1a1a1a; border-top: 4px solid var(--primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 15px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<div class="circle" style="width: 300px; height: 300px; top: -100px; left: -100px;"></div>
+<div class="circle" style="width: 400px; height: 400px; bottom: -150px; right: -150px; background: #ff416c;"></div>
+
+<div class="card animate__animated animate__zoomIn">
+    <div class="text-center">
+        <div class="feature-badge">FREE • AD-FREE • UNLIMITED</div>
+        <h1 class="logo-text">NexLoad</h1>
+        <p class="tagline">Download YT & Instagram videos in one tap.</p>
+    </div>
+
+    <form action="/download" method="post" id="mainForm">
+        <div class="input-group mb-3">
+            <span class="input-group-text bg-transparent border-0 text-secondary"><i class="fas fa-link"></i></span>
+            <input type="text" name="url" class="form-control" placeholder="Paste URL here..." required>
+        </div>
+        
+        <div class="row g-2">
+            <div class="col-6">
+                <select name="format" class="form-select">
+                    <option value="mp4">🎬 Video (MP4)</option>
+                    <option value="mp3">🎵 Audio (MP3)</option>
+                </select>
+            </div>
+            <div class="col-6">
+                <select name="quality" class="form-select">
+                    <option value="best">🔥 Best Quality</option>
+                    <option value="2160">4K Ultra HD</option>
+                    <option value="1440">2K Quality</option>
+                    <option value="1080">1080p Full HD</option>
+                    <option value="720">720p HD</option>
+                    <option value="480">480p</option>
+                    <option value="360">360p</option>
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-download mt-4" id="btnText">
+            <i class="fas fa-bolt me-2"></i> Get Video
+        </button>
+    </form>
+
+    <div id="status-area" class="text-center animate__animated animate__fadeIn">
+        <div class="loader-ring"></div>
+        <h5 id="status-text">Connecting to Server...</h5>
+        <p class="text-secondary small">Your download will start in Chrome shortly.</p>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('mainForm');
+    const btn = document.getElementById('btnText');
+    const status = document.getElementById('status-area');
+    const msg = document.getElementById('status-text');
+
+    form.onsubmit = function() {
+        form.style.display = 'none';
+        status.style.display = 'block';
+        
+        setTimeout(() => { msg.innerText = "Extracting High Quality Media..."; }, 2000);
+        setTimeout(() => { msg.innerText = "Merging Video & Audio (FFmpeg)..."; }, 5000);
+        setTimeout(() => { msg.innerText = "Sending to Browser..."; }, 8000);
+
+        // Auto reset UI when user comes back
+        window.onfocus = function() {
+            setTimeout(() => {
+                form.style.display = 'block';
+                status.style.display = 'none';
+                msg.innerText = "Connecting to Server...";
+            }, 3000);
+        }
+    };
+</script>
+
+</body>
+</html>
