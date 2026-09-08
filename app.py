@@ -23,10 +23,10 @@ def download_video():
         'ffmpeg_location': './ffmpeg_bin/bin', 
         'noplaylist': True,
         'quiet': True,
-        'no_warnings': True,
-        'cookiefile': 'cookies.txt',  # <--- Ye rahi wo zaroori line
-        'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-        'referer': 'https://www.youtube.com/',
+        'cookiefile': 'cookies.txt',
+        # YouTube ko dhokha dene ke liye: Use Android/iOS client
+        'extractor_args': {'youtube': {'player_client': ['android', 'web']}},
+        'user_agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36',
     }
 
     if format_type == 'mp3':
@@ -39,11 +39,8 @@ def download_video():
             }],
         })
     else:
-        if quality == 'best':
-            ydl_opts['format'] = 'bestvideo+bestaudio/best'
-        else:
-            ydl_opts['format'] = f'bestvideo[height<={quality}]+bestaudio/best'
-        
+        # Best video under selected quality
+        ydl_opts['format'] = f'bestvideo[height<={quality}][ext=mp4]+bestaudio[ext=m4a]/best[height<={quality}][ext=mp4]/best'
         ydl_opts['merge_output_format'] = 'mp4'
 
     try:
@@ -53,12 +50,10 @@ def download_video():
             
             if format_type == 'mp3':
                 filename = os.path.splitext(filename)[0] + '.mp3'
-            elif not filename.endswith('.mp4'):
-                 filename = os.path.splitext(filename)[0] + '.mp4'
-
+            
         return send_file(filename, as_attachment=True)
     except Exception as e:
-        return f"YouTube is blocking the request. Error: {str(e)}"
+        return f"YouTube Error: {str(e)}. Try refreshing cookies or a different link."
 
 if __name__ == '__main__':
     app.run(debug=True)
