@@ -24,9 +24,8 @@ def download_video():
         'noplaylist': True,
         'quiet': True,
         'cookiefile': 'cookies.txt',
-        # YouTube ko dhokha dene ke liye: Use Android/iOS client
         'extractor_args': {'youtube': {'player_client': ['android', 'web']}},
-        'user_agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36',
+        'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
     }
 
     if format_type == 'mp3':
@@ -39,8 +38,14 @@ def download_video():
             }],
         })
     else:
-        # Best video under selected quality
-        ydl_opts['format'] = f'bestvideo[height<={quality}][ext=mp4]+bestaudio[ext=m4a]/best[height<={quality}][ext=mp4]/best'
+        # QUALITY LOGIC FIX:
+        if quality == 'best':
+            # Sabse best quality bina kisi filter ke
+            ydl_opts['format'] = 'bestvideo+bestaudio/best'
+        else:
+            # Agar user ne 1080 ya 720 chuna hai
+            ydl_opts['format'] = f'bestvideo[height<={quality}][ext=mp4]+bestaudio[ext=m4a]/best[height<={quality}][ext=mp4]/best'
+        
         ydl_opts['merge_output_format'] = 'mp4'
 
     try:
@@ -48,12 +53,14 @@ def download_video():
             info = ydl.extract_info(video_url, download=True)
             filename = ydl.prepare_filename(info)
             
-            if format_type == 'mp3':
-                filename = os.path.splitext(filename)[0] + '.mp3'
+            # Agar file format MP3 hai par extension kuch aur, toh sahi karein
+            if format_type == 'mp3' and not filename.endswith('.mp3'):
+                base, ext = os.path.splitext(filename)
+                filename = base + '.mp3'
             
         return send_file(filename, as_attachment=True)
     except Exception as e:
-        return f"YouTube Error: {str(e)}. Try refreshing cookies or a different link."
+        return f"NexLoad Error: {str(e)}. Try a different quality or link."
 
 if __name__ == '__main__':
     app.run(debug=True)
