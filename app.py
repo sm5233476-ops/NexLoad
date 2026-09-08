@@ -22,9 +22,9 @@ def download_video():
         'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s',
         'ffmpeg_location': './ffmpeg_bin/bin', 
         'noplaylist': True,
-        # YouTube bot detection se bachne ke liye ye lines zaroori hain
         'quiet': True,
         'no_warnings': True,
+        'cookiefile': 'cookies.txt',  # <--- Ye rahi wo zaroori line
         'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
         'referer': 'https://www.youtube.com/',
     }
@@ -58,7 +58,6 @@ def download_video():
 
         return send_file(filename, as_attachment=True)
     except Exception as e:
-        # Agar fir se wahi error aaye to user ko saaf message dikhe
         return f"YouTube is blocking the request. Error: {str(e)}"
 
 if __name__ == '__main__':
