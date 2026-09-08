@@ -20,8 +20,13 @@ def download_video():
 
     ydl_opts = {
         'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s',
-        'ffmpeg_location': './ffmpeg_bin/bin',
+        'ffmpeg_location': './ffmpeg_bin/bin', 
         'noplaylist': True,
+        # YouTube bot detection se bachne ke liye ye lines zaroori hain
+        'quiet': True,
+        'no_warnings': True,
+        'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        'referer': 'https://www.youtube.com/',
     }
 
     if format_type == 'mp3':
@@ -34,11 +39,9 @@ def download_video():
             }],
         })
     else:
-        # Quality logic
         if quality == 'best':
             ydl_opts['format'] = 'bestvideo+bestaudio/best'
         else:
-            # Picks best video up to chosen quality + best audio
             ydl_opts['format'] = f'bestvideo[height<={quality}]+bestaudio/best'
         
         ydl_opts['merge_output_format'] = 'mp4'
@@ -55,7 +58,8 @@ def download_video():
 
         return send_file(filename, as_attachment=True)
     except Exception as e:
-        return f"Error: {str(e)}"
+        # Agar fir se wahi error aaye to user ko saaf message dikhe
+        return f"YouTube is blocking the request. Error: {str(e)}"
 
 if __name__ == '__main__':
     app.run(debug=True)
