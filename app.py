@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, make_response
 import yt_dlp
 import os
 
@@ -20,7 +20,7 @@ def download_video():
 
     is_instagram = 'instagram.com' in video_url
 
-    # INSTAGRAM KE LIYE SIMPLE AUR FAST SETTINGS:
+    # INSTAGRAM SETTINGS:
     if is_instagram:
         ydl_opts = {
             'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s',
@@ -28,7 +28,7 @@ def download_video():
             'quiet': True,
             'noplaylist': True,
         }
-    # YOUTUBE KE LIYE CHROME IMPERSONATION:
+    # YOUTUBE SETTINGS:
     else:
         ydl_opts = {
             'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s',
@@ -62,12 +62,19 @@ def download_video():
             filename = ydl.prepare_filename(info)
 
             base, ext = os.path.splitext(filename)
-            final_filename = base + ('.mp3' if format_type == 'mp3' else '.mp4')
+            if format_type == 'mp3':
+                final_filename = base + '.mp3'
+            else:
+                final_filename = base + '.mp4'
 
             if os.path.exists(filename) and filename != final_filename:
                 os.rename(filename, final_filename)
 
-        return send_file(final_filename, as_attachment=True)
+        # File bhejiye aur sath mein "download_done" signal (cookie) set kijiye
+        response = make_response(send_file(final_filename, as_attachment=True))
+        response.set_cookie('download_done', 'yes', path='/')
+        return response
+
     except Exception as e:
         return f"NexLoad Error: {str(e)}"
 
