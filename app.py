@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request, send_file
 import yt_dlp
 import os
+import static_ffmpeg
+
+# Ye magic line FFmpeg ko apne aap chalu kar degi
+static_ffmpeg.add_paths()
 
 app = Flask(__name__)
 
@@ -20,11 +24,10 @@ def download_video():
 
     ydl_opts = {
         'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s',
-        'ffmpeg_location': './ffmpeg_bin/bin', 
         'noplaylist': True,
         'quiet': True,
         'cookiefile': 'cookies.txt',
-        # Naya Client Bypass:
+        # YouTube ko lagega phone se request aa rahi hai
         'extractor_args': {'youtube': {'player_client': ['mweb', 'android']}},
         'user_agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36',
     }
@@ -39,7 +42,6 @@ def download_video():
             }],
         })
     else:
-        # QUALITY LOGIC FIX:
         if quality == 'best':
             ydl_opts['format'] = 'bestvideo+bestaudio/best'
         else:
@@ -63,4 +65,4 @@ def download_video():
         return f"NexLoad Error: {str(e)}"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=7860) # Hugging Face ke liye port 7860 zaroori hai
+    app.run(host='0.0.0.0', port=8000)
