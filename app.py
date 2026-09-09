@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, send_file, make_response
+from flask import Flask, render_template, request, send_file, redirect, make_response
 import yt_dlp
+import requests
 import os
 
 app = Flask(__name__)
@@ -7,6 +8,13 @@ app = Flask(__name__)
 DOWNLOAD_FOLDER = 'downloads'
 if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
+
+# Public Cobalt Instances (Zero Bot Block)
+COBALT_INSTANCES = [
+    "https://cobalt.canine.tools",
+    "https://cobalt.meowing.de",
+    "https://api.cobalt.tools"
+]
 
 @app.route('/')
 def index():
@@ -18,65 +26,60 @@ def download_video():
     format_type = request.form.get('format', 'mp4')
     quality = request.form.get('quality', 'best')
 
-    is_instagram = 'instagram.com' in video_url
+    is_youtube = ('youtube.com' in video_url) or ('youtu.be' in video_url)
 
-    # INSTAGRAM SETTINGS:
-    if is_instagram:
+    # 1. YOUTUBE ENGINE (HIGH-SPEED API - NO BOT CHECKS)
+    if is_youtube:
+        payload = {
+            "url": video_url,
+            "videoQuality": "1080" if quality == "1080" else ("720" if quality == "720" else "max"),
+            "downloadMode": "audio" if format_type == "mp3" else "auto"
+        }
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        for instance in COBALT_INSTANCES:
+            try:
+                res = requests.post(instance, json=payload, headers=headers, timeout=12)
+                if res.status_code == 200:
+                    data = res.json()
+                    dl_url = data.get('url')
+                    if dl_url:
+                        resp = make_response(redirect(dl_url))
+                        resp.set_cookie('download_done', 'yes', path='/')
+                        return resp
+            except Exception:
+                continue
+
+        return "NexLoad Error: YouTube servers are busy. Please try again in a few seconds."
+
+    # 2. INSTAGRAM ENGINE (LOCAL VPS ENGINE - 100% WORKING)
+    else:
         ydl_opts = {
             'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s',
             'format': 'best',
             'quiet': True,
             'noplaylist': True,
         }
-    # YOUTUBE SETTINGS:
-    else:
-        ydl_opts = {
-            'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s',
-            'noplaylist': True,
-            'quiet': True,
-            'impersonate': 'chrome',
-            'remote_components': 'ejs:github',
-        }
-        if os.path.exists('cookies.txt'):
-            ydl_opts['cookiefile'] = 'cookies.txt'
 
-        if format_type == 'mp3':
-            ydl_opts.update({
-                'format': 'bestaudio/best',
-                'postprocessors': [{
-                    'key': 'FFmpegExtractAudio',
-                    'preferredcodec': 'mp3',
-                    'preferredquality': '192',
-                }],
-            })
-        else:
-            if quality == 'best':
-                ydl_opts['format'] = 'bestvideo+bestaudio/best'
-            else:
-                ydl_opts['format'] = f'bestvideo[height<={quality}]+bestaudio/best/best'
-            ydl_opts['merge_output_format'] = 'mp4'
+        try:
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                info = ydl.extract_info(video_url, download=True)
+                filename = ydl.prepare_filename(info)
 
-    try:
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(video_url, download=True)
-            filename = ydl.prepare_filename(info)
+                base, ext = os.path.splitext(filename)
+                final_filename = base + ('.mp3' if format_type == 'mp3' else '.mp4')
 
-            base, ext = os.path.splitext(filename)
-            if format_type == 'mp3':
-                final_filename = base + '.mp3'
-            else:
-                final_filename = base + '.mp4'
+                if os.path.exists(filename) and filename != final_filename:
+                    os.rename(filename, final_filename)
 
-            if os.path.exists(filename) and filename != final_filename:
-                os.rename(filename, final_filename)
-
-        # File bhejiye aur sath mein "download_done" signal (cookie) set kijiye
-        response = make_response(send_file(final_filename, as_attachment=True))
-        response.set_cookie('download_done', 'yes', path='/')
-        return response
-
-    except Exception as e:
-        return f"NexLoad Error: {str(e)}"
+            resp = make_response(send_file(final_filename, as_attachment=True))
+            resp.set_cookie('download_done', 'yes', path='/')
+            return resp
+        except Exception as e:
+            return f"NexLoad Error: {str(e)}"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=5000)
