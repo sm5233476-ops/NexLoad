@@ -62,9 +62,14 @@ def download_video():
             filename = ydl.prepare_filename(info)
 
             base, ext = os.path.splitext(filename)
-            if format_type == 'mp3':
-                final_filename = base + '.mp3'
-            else:
-                final_filename = base + '.mp4'
+            final_filename = base + ('.mp3' if format_type == 'mp3' else '.mp4')
 
-            if os.path.exists(filename) and filename
+            if os.path.exists(filename) and filename != final_filename:
+                os.rename(filename, final_filename)
+
+        return send_file(final_filename, as_attachment=True)
+    except Exception as e:
+        return f"NexLoad Error: {str(e)}"
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=80)
