@@ -3,133 +3,456 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexLoad - Fast, Free, No-Ads Downloader</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>NexLoad — Instagram Reels & Video Downloader</title>
+    <meta name="description" content="Download Instagram Reels, Videos, and Audio in original high quality with one tap. Fast, free, and no annoying ads.">
     
+    <!-- Google Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
-        :root { --primary: #00f2fe; --secondary: #4facfe; --accent: #ff416c; }
-        body { 
-            background: #050505; 
-            color: white; 
-            font-family: 'Inter', sans-serif;
+        :root {
+            --bg-dark: #090a0f;
+            --card-bg: rgba(18, 20, 29, 0.75);
+            --border-glow: rgba(255, 255, 255, 0.08);
+            --ig-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            --btn-glow: 0 10px 30px rgba(220, 39, 67, 0.4);
+            --accent-cyan: #00f2fe;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
             min-height: 100vh;
-            display: flex; align-items: center; justify-content: center;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        .card { 
-            background: rgba(20, 20, 20, 0.8); 
-            backdrop-filter: blur(20px); 
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 30px; padding: 50px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            max-width: 600px; width: 100%;
-        }
-        .logo-text { font-size: 3rem; font-weight: 900; letter-spacing: -2px; background: linear-gradient(to right, #00f2fe, #4facfe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 5px; }
-        .tagline { color: #aaa; font-size: 0.9rem; margin-bottom: 30px; }
-        .feature-badge { background: rgba(255, 65, 108, 0.1); color: #ff416c; padding: 5px 15px; border-radius: 50px; font-size: 0.7rem; font-weight: bold; margin-bottom: 20px; display: inline-block; border: 1px solid rgba(255, 65, 108, 0.3); }
 
-        .form-control, .form-select { 
-            background: #1a1a1a !important; border: 1px solid #333 !important; color: white !important; 
-            padding: 15px; border-radius: 15px; margin-bottom: 15px;
+        /* Ambient Glow Blobs in Background */
+        .blob-1 {
+            position: absolute;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(225, 48, 108, 0.25) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(80px);
+            z-index: -1;
+            pointer-events: none;
         }
-        option { background: #1a1a1a; color: white; padding: 10px; }
+        .blob-2 {
+            position: absolute;
+            bottom: 10%;
+            right: -100px;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(131, 58, 180, 0.2) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(80px);
+            z-index: -1;
+            pointer-events: none;
+        }
 
-        .btn-download { 
-            background: linear-gradient(45deg, #ff416c, #ff4b2b); border: none; color: white; 
-            padding: 18px; border-radius: 15px; font-weight: 800; width: 100%;
-            transition: 0.4s; text-transform: uppercase;
+        /* Header / Navbar */
+        header {
+            padding: 24px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .btn-download:hover { transform: scale(1.02); box-shadow: 0 0 30px rgba(255,65,108,0.5); }
-        
-        #status-area { display: none; margin-top: 30px; text-align: center; }
-        .loader-ring { border: 4px solid #1a1a1a; border-top: 4px solid var(--primary); border-radius: 50%; width: 45px; height: 45px; animation: spin 1s linear infinite; margin: 0 auto 15px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: var(--ig-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(225, 48, 108, 0.35);
+        }
+        .logo-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 40%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-        .btn-reset {
-            background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #aaa;
-            padding: 8px 18px; border-radius: 20px; font-size: 0.8rem; margin-top: 15px; transition: 0.3s;
+        /* Main Container */
+        main {
+            max-width: 680px;
+            width: 92%;
+            margin: 10px auto 50px auto;
+            text-align: center;
         }
-        .btn-reset:hover { background: rgba(255,255,255,0.1); color: white; }
+
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #f472b6;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+        .highlight {
+            background: var(--ig-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1rem;
+            margin-bottom: 35px;
+        }
+
+        /* Downloader Card */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(24px);
+            border: 1px solid var(--border-glow);
+            border-radius: 28px;
+            padding: 36px 30px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        /* Format Switcher Toggle */
+        .format-selector {
+            display: flex;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 16px;
+            padding: 5px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .format-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            color: #94a3b8;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .format-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Input Wrapper with Paste Button */
+        .input-box-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .input-field {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            padding: 18px 105px 18px 48px;
+            border-radius: 18px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            border-color: #dc2743;
+            box-shadow: 0 0 25px rgba(220, 39, 67, 0.35);
+        }
+        .input-field::placeholder { color: #64748b; font-size: 0.95rem; }
+        .input-icon {
+            position: absolute;
+            left: 18px;
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+        .paste-btn {
+            position: absolute;
+            right: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #f1f5f9;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .paste-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        /* Download Submit Button */
+        .submit-btn {
+            width: 100%;
+            background: var(--ig-gradient);
+            border: none;
+            color: white;
+            padding: 18px;
+            border-radius: 18px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: var(--btn-glow);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(220, 39, 67, 0.6);
+        }
+        .submit-btn:active { transform: scale(0.98); }
+
+        /* Animated Loading Area */
+        #loading-area {
+            display: none;
+            padding: 20px 0 10px 0;
+        }
+        .custom-spinner {
+            width: 52px;
+            height: 52px;
+            margin: 0 auto 18px auto;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid #dc2743;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .loading-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
+        .loading-sub { font-size: 0.85rem; color: #94a3b8; }
+        .reset-link {
+            display: inline-block;
+            margin-top: 18px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #cbd5e1;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .reset-link:hover { background: rgba(255, 255, 255, 0.1); color: white; }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 50px;
+        }
+        .feat-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 24px 16px;
+            text-align: center;
+        }
+        .feat-icon {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            background: var(--ig-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .feat-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+        .feat-desc { font-size: 0.8rem; color: #64748b; line-height: 1.4; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #475569;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.9rem; }
+            .glass-card { padding: 26px 18px; border-radius: 24px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .input-field { padding: 16px 95px 16px 42px; font-size: 0.95rem; }
+            .submit-btn { padding: 16px; font-size: 1rem; }
+        }
     </style>
 </head>
 <body>
 
-<div class="card animate__animated animate__zoomIn">
-    <div class="text-center">
-        <div class="feature-badge">FREE • AD-FREE • UNLIMITED</div>
-        <h1 class="logo-text">NexLoad</h1>
-        <p class="tagline">Download YT & Instagram videos in one tap.</p>
-    </div>
+    <div class="blob-1"></div>
+    <div class="blob-2"></div>
 
-    <form action="/download" method="post" id="mainForm">
-        <div class="input-group mb-3">
-            <span class="input-group-text bg-transparent border-0 text-secondary"><i class="fas fa-link"></i></span>
-            <input type="text" name="url" id="videoUrl" class="form-control" placeholder="Paste link here..." required>
+    <header>
+        <a href="/" class="logo-container">
+            <div class="logo-icon"><i class="fa-brands fa-instagram"></i></div>
+            <span class="logo-title">NexLoad</span>
+        </a>
+    </header>
+
+    <main>
+        <div class="badge-pill">
+            <i class="fa-solid fa-bolt"></i> 100% Free • Unlimited • Original Quality
         </div>
         
-        <div class="row g-2">
-            <div class="col-6">
-                <select name="format" class="form-select">
-                    <option value="mp4">🎬 Video (MP4)</option>
-                    <option value="mp3">🎵 Audio (MP3)</option>
-                </select>
+        <h1>Download Instagram <br><span class="highlight">Reels, Videos & Audio</span></h1>
+        <p class="subtitle">Fastest high-speed video saver. No watermark, no signup.</p>
+
+        <div class="glass-card">
+            <!-- Format Selector -->
+            <div class="format-selector">
+                <button type="button" class="format-btn active" onclick="setFormat('mp4', this)">
+                    <i class="fa-solid fa-film"></i> Video (MP4)
+                </button>
+                <button type="button" class="format-btn" onclick="setFormat('mp3', this)">
+                    <i class="fa-solid fa-music"></i> Audio Only (MP3)
+                </button>
             </div>
-            <div class="col-6">
-                <select name="quality" class="form-select">
-                    <option value="best">🔥 Best Quality</option>
-                    <option value="2160">4K Ultra HD</option>
-                    <option value="1080">1080p Full HD</option>
-                    <option value="720">720p HD</option>
-                </select>
+
+            <!-- Form -->
+            <form action="/download" method="post" id="dlForm">
+                <input type="hidden" name="format" id="formatInput" value="mp4">
+                
+                <div class="input-box-wrapper">
+                    <i class="fa-solid fa-link input-icon"></i>
+                    <input type="url" name="url" id="urlInput" class="input-field" placeholder="Paste Instagram link here..." required autocomplete="off">
+                    <button type="button" class="paste-btn" onclick="pasteClipboard()">
+                        <i class="fa-regular fa-paste"></i> Paste
+                    </button>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <i class="fa-solid fa-cloud-arrow-down"></i> Download Now
+                </button>
+            </form>
+
+            <!-- Loading Spinner -->
+            <div id="loading-area">
+                <div class="custom-spinner"></div>
+                <div class="loading-title">Extracting Best Quality...</div>
+                <div class="loading-sub">Your download will start in your browser in seconds.</div>
+                <button type="button" class="reset-link" onclick="resetForm()">
+                    <i class="fa-solid fa-rotate-left"></i> Download Another
+                </button>
             </div>
         </div>
 
-        <button type="submit" class="btn-download mt-4" id="btnText">
-            <i class="fas fa-bolt me-2"></i> Get Video
-        </button>
-    </form>
+        <!-- 3 Feature Boxes -->
+        <div class="features-grid">
+            <div class="feat-box">
+                <div class="feat-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+                <div class="feat-title">Lightning Fast</div>
+                <div class="feat-desc">Direct high-speed downloads processed right on dedicated cloud servers.</div>
+            </div>
+            <div class="feat-box">
+                <div class="feat-icon"><i class="fa-solid fa-circle-check"></i></div>
+                <div class="feat-title">Original Quality</div>
+                <div class="feat-desc">Get the highest 1080p full resolution MP4 with crystal clear audio.</div>
+            </div>
+            <div class="feat-box">
+                <div class="feat-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="feat-title">100% Safe & Free</div>
+                <div class="feat-desc">No login required, no annoying full-page popup ads. Just clean downloads.</div>
+            </div>
+        </div>
+    </main>
 
-    <div id="status-area" class="animate__animated animate__fadeIn">
-        <div class="loader-ring"></div>
-        <h5 id="status-text" class="text-info">Processing Video...</h5>
-        <p class="text-secondary small">Your download will begin shortly in your browser.</p>
-        <button type="button" class="btn-reset" onclick="resetForm()">
-            <i class="fas fa-redo me-1"></i> Download Another Video
-        </button>
-    </div>
-</div>
+    <footer>
+        <p>© 2026 NexLoad. Built for creators & editors.</p>
+    </footer>
 
-<script>
-    const form = document.getElementById('mainForm');
-    const status = document.getElementById('status-area');
-    const msg = document.getElementById('status-text');
+    <script>
+        // Format Switcher
+        function setFormat(type, btn) {
+            document.getElementById('formatInput').value = type;
+            document.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
 
-    form.onsubmit = function() {
-        form.style.display = 'none';
-        status.style.display = 'block';
-        msg.innerText = "Downloading from Server...";
-
-        // Purani cookie saaf karein
-        document.cookie = "download_done=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-        // Har aadhe second mein check karein ki download complete hua ya nahi
-        const checkTimer = setInterval(function() {
-            if (document.cookie.indexOf('download_done=yes') !== -1) {
-                clearInterval(checkTimer);
-                document.cookie = "download_done=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                resetForm();
+        // Instant One-Tap Paste
+        async function pasteClipboard() {
+            try {
+                const text = await navigator.clipboard.readText();
+                if (text) {
+                    document.getElementById('urlInput').value = text.trim();
+                }
+            } catch (err) {
+                alert("Please allow clipboard permission or paste manually.");
             }
-        }, 500);
-    };
+        }
 
-    function resetForm() {
-        form.style.display = 'block';
-        status.style.display = 'none';
-        document.getElementById('videoUrl').value = '';
-    }
-</script>
+        // Handle Download State
+        const form = document.getElementById('dlForm');
+        const loading = document.getElementById('loading-area');
 
+        form.onsubmit = function() {
+            form.style.display = 'none';
+            loading.style.display = 'block';
+
+            // Reset Cookie
+            document.cookie = "download_done=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+            // Check if file sent to browser
+            const timer = setInterval(() => {
+                if (document.cookie.indexOf('download_done=yes') !== -1) {
+                    clearInterval(timer);
+                    document.cookie = "download_done=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    resetForm();
+                }
+            }, 500);
+        };
+
+        function resetForm() {
+            form.style.display = 'block';
+            loading.style.display = 'none';
+            document.getElementById('urlInput').value = '';
+        }
+    </script>
 </body>
 </html>
