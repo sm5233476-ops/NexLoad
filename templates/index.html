@@ -4,7 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NexLoad — Instagram Reels & Video Downloader</title>
-    <meta name="description" content="Download Instagram Reels, Videos, and Audio in original high quality with one tap. Fast, free, and no annoying ads.">
+    
+    <!-- 1. Google Search Console Verification -->
+    <meta name="google-site-verification" content="-VzraoSDqAsfmqMbDd7E-etkM2dSOuYPgcTAcMhXk8k" />
+    
+    <!-- 2. SEO & WhatsApp / Social Sharing Previews -->
+    <meta name="description" content="Download Instagram Reels, Videos, and Audio in original 1080p high quality in 1-tap. Fast, free, unlimited and no annoying ads.">
+    <meta property="og:title" content="NexLoad — 1-Tap Instagram Reels Downloader">
+    <meta property="og:description" content="Download Instagram Reels, Videos & Audio in original high quality. Fast, Free, No Ads.">
+    <meta property="og:url" content="https://nexload.online">
+    <meta property="og:type" content="website">
+
+    <!-- 3. Official NexLoad Logo in Browser Tab (Favicon) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23f09433'/><stop offset='50%25' stop-color='%23dc2743'/><stop offset='100%25' stop-color='%23bc1888'/></linearGradient></defs><rect width='100' height='100' rx='26' fill='url(%23g)'/><path d='M50 24 L50 58 M36 46 L50 60 L64 46 M30 74 L70 74' stroke='white' stroke-width='9' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>">
     
     <!-- Google Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +31,6 @@
             --border-glow: rgba(255, 255, 255, 0.08);
             --ig-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
             --btn-glow: 0 10px 30px rgba(220, 39, 67, 0.4);
-            --accent-cyan: #00f2fe;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -33,7 +44,6 @@
             justify-content: space-between;
         }
 
-        /* Ambient Glow Blobs in Background */
         .blob-1 {
             position: absolute;
             top: -150px;
@@ -58,7 +68,6 @@
             pointer-events: none;
         }
 
-        /* Header / Navbar */
         header {
             padding: 24px 20px;
             display: flex;
@@ -92,7 +101,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Main Container */
         main {
             max-width: 680px;
             width: 92%;
@@ -133,7 +141,6 @@
             margin-bottom: 35px;
         }
 
-        /* Downloader Card */
         .glass-card {
             background: var(--card-bg);
             backdrop-filter: blur(24px);
@@ -144,7 +151,6 @@
             position: relative;
         }
 
-        /* Format Switcher Toggle */
         .format-selector {
             display: flex;
             background: rgba(0, 0, 0, 0.4);
@@ -175,7 +181,6 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* Input Wrapper with Paste Button */
         .input-box-wrapper {
             position: relative;
             display: flex;
@@ -225,7 +230,6 @@
             color: white;
         }
 
-        /* Download Submit Button */
         .submit-btn {
             width: 100%;
             background: var(--ig-gradient);
@@ -250,7 +254,6 @@
         }
         .submit-btn:active { transform: scale(0.98); }
 
-        /* Animated Loading Area */
         #loading-area {
             display: none;
             padding: 20px 0 10px 0;
@@ -281,7 +284,6 @@
         }
         .reset-link:hover { background: rgba(255, 255, 255, 0.1); color: white; }
 
-        /* Features Section */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -305,7 +307,6 @@
         .feat-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
         .feat-desc { font-size: 0.8rem; color: #64748b; line-height: 1.4; }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 30px 20px;
@@ -314,7 +315,6 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Mobile Optimization */
         @media (max-width: 600px) {
             h1 { font-size: 1.9rem; }
             .glass-card { padding: 26px 18px; border-radius: 24px; }
@@ -383,7 +383,6 @@
             </div>
         </div>
 
-        <!-- 3 Feature Boxes -->
         <div class="features-grid">
             <div class="feat-box">
                 <div class="feat-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
@@ -408,14 +407,12 @@
     </footer>
 
     <script>
-        // Format Switcher
         function setFormat(type, btn) {
             document.getElementById('formatInput').value = type;
             document.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         }
 
-        // Instant One-Tap Paste
         async function pasteClipboard() {
             try {
                 const text = await navigator.clipboard.readText();
@@ -427,7 +424,6 @@
             }
         }
 
-        // Handle Download State
         const form = document.getElementById('dlForm');
         const loading = document.getElementById('loading-area');
 
@@ -435,10 +431,8 @@
             form.style.display = 'none';
             loading.style.display = 'block';
 
-            // Reset Cookie
             document.cookie = "download_done=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
-            // Check if file sent to browser
             const timer = setInterval(() => {
                 if (document.cookie.indexOf('download_done=yes') !== -1) {
                     clearInterval(timer);
@@ -449,10 +443,4 @@
         };
 
         function resetForm() {
-            form.style.display = 'block';
-            loading.style.display = 'none';
-            document.getElementById('urlInput').value = '';
-        }
-    </script>
-</body>
-</html>
+            for
