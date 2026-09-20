@@ -8,6 +8,9 @@ DOWNLOAD_FOLDER = 'downloads'
 if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
 
+# कुकीज़ फ़ाइल का पक्का पाथ
+COOKIE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cookies.txt')
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -21,11 +24,20 @@ def download_video():
         return "Please provide a valid video link."
 
     ydl_opts = {
-        'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s',
+        'outtmpl': f'{DOWNLOAD_FOLDER}/%(id)s.%(ext)s',
         'format': 'best',
         'quiet': True,
+        'no_warnings': True,
         'noplaylist': True,
+        'http_headers': {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+            'Accept-Language': 'en-US,en;q=0.9',
+        }
     }
+
+    # कुकीज़ जोड़ना (यही सबसे ज़रूरी चीज़ मिस थी)
+    if os.path.exists(COOKIE_FILE):
+        ydl_opts['cookiefile'] = COOKIE_FILE
 
     if format_type == 'mp3':
         ydl_opts.update({
@@ -59,4 +71,5 @@ def download_video():
         return f"NexLoad Error: {str(e)}"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
