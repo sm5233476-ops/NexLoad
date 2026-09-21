@@ -3,43 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NexLoad — High-Fidelity Instagram Media Downloader</title>
+    <title>NexLoad — Free Instagram Reels & Video Downloader</title>
     
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="-VzraoSDqAsfmqMbDd7E-etkM2dSOuYPgcTAcMhXk8k" />
     
-    <!-- SEO & Social Meta Tags -->
-    <meta name="description" content="Download Instagram Reels, Videos, and Audio in original source resolution. High-speed, stateless, lossless media extraction for creators.">
-    <meta property="og:title" content="NexLoad — Studio-Grade Instagram Downloader">
-    <meta property="og:description" content="Direct source media extraction at maximum bitrate without compression or watermarks.">
+    <!-- SEO & Social Sharing Tags -->
+    <meta name="description" content="Download Instagram Reels, Videos, and MP3 Audio in original Full HD quality. 100% Free, no watermark, and no annoying ads.">
+    <meta property="og:title" content="NexLoad — 1-Tap Instagram Downloader">
+    <meta property="og:description" content="Save Instagram Reels & Videos in Original HD. Fast, Free, No Watermark.">
     <meta property="og:url" content="https://nexload.online">
     <meta property="og:type" content="website">
 
-    <!-- Unified Official NexLoad Favicon (Exact Match with Header Logo) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='nlGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%236366f1'/><stop offset='50%25' stop-color='%23a855f7'/><stop offset='100%25' stop-color='%23ec4899'/></linearGradient></defs><rect width='100' height='100' rx='24' fill='%230b0d14'/><rect x='3' y='3' width='94' height='94' rx='21' stroke='rgba(255,255,255,0.1)' stroke-width='2' fill='none'/><path d='M30 72 V28 L50 52 V28 M70 28 V56 M58 46 L70 58 L82 46' stroke='url(%23nlGrad)' stroke-width='7.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>">
+    <!-- Official Matching Glowing Favicon (Tab Logo) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='nl' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23f09433'/><stop offset='30%25' stop-color='%23e6683c'/><stop offset='60%25' stop-color='%23dc2743'/><stop offset='100%25' stop-color='%23cc2366'/></linearGradient></defs><rect width='100' height='100' rx='26' fill='%23080a12'/><rect x='2' y='2' width='96' height='96' rx='24' stroke='url(%23nl)' stroke-width='4' fill='none'/><path d='M32 70 V30 L52 54 V30 M70 30 V58 M58 48 L70 60 L82 48' stroke='url(%23nl)' stroke-width='8.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>">
 
-    <!-- Google Fonts & FontAwesome -->
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         :root {
-            --bg-base: #07080c;
-            --surface-panel: rgba(15, 18, 26, 0.7);
-            --border-hairline: rgba(255, 255, 255, 0.08);
-            --border-hover: rgba(255, 255, 255, 0.16);
-            --brand-primary: #6366f1;
-            --brand-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-            --glow-ambient: rgba(99, 102, 241, 0.12);
+            --bg-dark: #05060c;
+            --card-glass: rgba(14, 18, 32, 0.82);
+            --sunset-glow: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            --cyan-glow: #00f2fe;
+            --pink-glow: #ff007f;
+            --border-glow: rgba(255, 255, 255, 0.12);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         
         body {
-            background-color: var(--bg-base);
-            color: #f8fafc;
+            background-color: var(--bg-dark);
+            color: #ffffff;
             min-height: 100vh;
             overflow-x: hidden;
             display: flex;
@@ -48,271 +47,294 @@
             position: relative;
         }
 
-        /* Subtle Top Atmospheric Spotlight (Clean, No Bubbles) */
-        .spotlight-top {
+        /* Fluid Neon Aurora Flow (No Childish Bubbles!) */
+        .aurora-bg {
             position: fixed;
-            top: -120px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 850px;
-            height: 450px;
-            background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(120, 119, 198, 0.18) 0%, rgba(0, 0, 0, 0) 75%);
-            pointer-events: none;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .aurora-flow-1 {
+            position: absolute;
+            top: -30%; left: -10%;
+            width: 120%; height: 80%;
+            background: radial-gradient(ellipse at center, rgba(220, 39, 67, 0.22) 0%, rgba(188, 24, 136, 0.12) 45%, transparent 70%);
+            filter: blur(100px);
+            animation: flow-wave 12s ease-in-out infinite alternate;
+        }
+        .aurora-flow-2 {
+            position: absolute;
+            bottom: -20%; right: -10%;
+            width: 120%; height: 70%;
+            background: radial-gradient(ellipse at center, rgba(0, 242, 254, 0.16) 0%, rgba(121, 40, 202, 0.14) 40%, transparent 70%);
+            filter: blur(110px);
+            animation: flow-wave 16s ease-in-out infinite alternate-reverse;
+        }
+        @keyframes flow-wave {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-30px, 40px) scale(1.08); }
+            100% { transform: translate(30px, -30px) scale(0.96); }
         }
 
-        /* Precision Micro-Grid */
-        .grid-canvas {
+        /* Subtle Cyber Grid Lines */
+        .cyber-grid {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
-            background-size: 50px 50px;
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
             z-index: -2;
             pointer-events: none;
         }
 
-        /* Header */
+        /* Header Navbar */
         header {
-            padding: 26px 20px;
+            padding: 22px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             max-width: 1050px;
-            width: 90%;
+            width: 92%;
             margin: 0 auto;
         }
-        .brand-link {
+        .logo-wrap {
             display: flex;
             align-items: center;
-            gap: 13px;
+            gap: 12px;
             text-decoration: none;
         }
-        
-        /* Unified Vector Monogram Logo */
-        .brand-monogram {
-            width: 42px; height: 42px;
-            background: #0b0d14;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 13px;
+        .logo-box {
+            width: 44px; height: 44px;
+            background: #080a12;
+            border: 1.5px solid rgba(220, 39, 67, 0.4);
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-            transition: border-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 0 20px rgba(220, 39, 67, 0.4);
+            transition: all 0.3s ease;
         }
-        .brand-link:hover .brand-monogram {
-            border-color: rgba(255, 255, 255, 0.25);
-            transform: scale(1.02);
+        .logo-wrap:hover .logo-box {
+            transform: scale(1.08) rotate(4deg);
+            border-color: #ff007f;
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.6);
         }
-
-        .brand-text {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            letter-spacing: -0.6px;
-            color: #ffffff;
-        }
-
-        .system-pill {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-hairline);
-            padding: 6px 14px;
-            border-radius: 40px;
-            font-size: 0.76rem;
-            font-weight: 600;
-            color: #94a3b8;
-            letter-spacing: 0.3px;
-            display: flex;
-            align-items: center;
-            gap: 7px;
-        }
-        .pulse-indicator {
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: #10b981;
-            box-shadow: 0 0 8px #10b981;
-        }
-
-        /* Main Workspace */
-        main {
-            max-width: 650px;
-            width: 90%;
-            margin: 25px auto 60px auto;
-            text-align: center;
-        }
-
-        /* Hero Typography */
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 16px;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.035);
-            border: 1px solid var(--border-hairline);
-            color: #cbd5e1;
-            font-size: 0.78rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            margin-bottom: 22px;
-        }
-
-        h1 {
-            font-size: 2.65rem;
-            font-weight: 800;
-            line-height: 1.18;
-            letter-spacing: -1.2px;
-            margin-bottom: 14px;
-            color: #ffffff;
-        }
-        .gradient-accent {
-            background: var(--brand-gradient);
+        .logo-text {
+            font-size: 1.85rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 40%, #fed7aa 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .lead-text {
-            color: #94a3b8;
-            font-size: 1.02rem;
-            line-height: 1.6;
-            margin-bottom: 34px;
-            font-weight: 400;
-        }
 
-        /* Extraction Card */
-        .workspace-card {
-            background: var(--surface-panel);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--border-hairline);
-            border-radius: 24px;
-            padding: 34px 28px;
-            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.65);
-            position: relative;
-            transition: border-color 0.25s ease;
-        }
-        .workspace-card:hover {
-            border-color: var(--border-hover);
-        }
-
-        /* Format Tabs */
-        .selector-tabs {
+        .server-pill {
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            color: var(--cyan-glow);
+            font-size: 0.76rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 50px;
             display: flex;
-            background: rgba(8, 10, 16, 0.65);
-            border: 1px solid var(--border-hairline);
-            border-radius: 14px;
-            padding: 4px;
-            margin-bottom: 22px;
-            gap: 4px;
+            align-items: center;
+            gap: 7px;
+            letter-spacing: 0.5px;
         }
-        .tab-btn {
+        .pulse-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--cyan-glow);
+            box-shadow: 0 0 10px var(--cyan-glow);
+            animation: blink 1.4s infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        /* Main Container */
+        main {
+            max-width: 660px;
+            width: 92%;
+            margin: 15px auto 55px auto;
+            text-align: center;
+        }
+
+        /* Hero Badges & Simple Headlines */
+        .fire-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 18px;
+            border-radius: 50px;
+            background: rgba(220, 39, 67, 0.12);
+            border: 1px solid rgba(220, 39, 67, 0.35);
+            color: #ff4d6d;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 25px rgba(220, 39, 67, 0.25);
+        }
+
+        h1 {
+            font-size: 2.7rem;
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+        .fire-text {
+            background: var(--sunset-glow);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(220, 39, 67, 0.3);
+        }
+        .simple-sub {
+            color: #94a3b8;
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+        }
+
+        /* Super Glowing Downloader Card */
+        .glass-card {
+            background: var(--card-glass);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1.5px solid var(--border-glow);
+            border-radius: 28px;
+            padding: 36px 28px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85),
+                        0 0 40px rgba(220, 39, 67, 0.15);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9),
+                        0 0 50px rgba(220, 39, 67, 0.25);
+        }
+
+        /* Format Tabs (Video / Audio) */
+        .format-toggle {
+            display: flex;
+            background: rgba(4, 5, 10, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 5px;
+            margin-bottom: 22px;
+            gap: 5px;
+        }
+        .format-btn {
             flex: 1;
-            padding: 11px;
+            padding: 12px;
             border: none;
             background: transparent;
             color: #94a3b8;
-            font-weight: 600;
-            font-size: 0.88rem;
-            border-radius: 11px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
         }
-        .tab-btn.active {
-            background: rgba(255, 255, 255, 0.08);
+        .format-btn.active {
+            background: rgba(255, 255, 255, 0.1);
             color: #ffffff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.08);
         }
 
-        /* Input Container with Integrated Micro-Actions */
-        .input-bar {
+        /* Input Bar with Paste & Cut Action */
+        .input-holder {
             position: relative;
             display: flex;
             align-items: center;
             margin-bottom: 12px;
         }
-        .input-lead-icon {
+        .input-icon {
             position: absolute;
             left: 18px;
             color: #64748b;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             pointer-events: none;
-            transition: color 0.2s ease;
+            transition: color 0.3s ease;
         }
-        .url-input {
+        .url-box {
             width: 100%;
-            background: rgba(6, 8, 13, 0.6);
-            border: 1.5px solid var(--border-hairline);
-            padding: 17px 110px 17px 48px;
-            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.65);
+            border: 1.8px solid rgba(255, 255, 255, 0.1);
+            padding: 19px 115px 19px 50px;
+            border-radius: 18px;
             color: #ffffff;
-            font-size: 0.96rem;
+            font-size: 1rem;
             font-weight: 500;
             outline: none;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
         }
-        .url-input::placeholder { color: #475569; }
-        .url-input:focus {
-            border-color: var(--brand-primary);
-            box-shadow: 0 0 25px var(--glow-ambient);
+        .url-box::placeholder { color: #526177; font-size: 0.95rem; }
+        .url-box:focus {
+            border-color: #dc2743;
+            box-shadow: 0 0 30px rgba(220, 39, 67, 0.4);
         }
-        .url-input:focus ~ .input-lead-icon { color: var(--brand-primary); }
+        .url-box:focus ~ .input-icon { color: #dc2743; }
 
-        /* Integrated Button Actions */
-        .action-tray {
+        /* Integrated Buttons (Paste + Cut) */
+        .btn-tray {
             position: absolute;
             right: 8px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
         }
-        .btn-clear-action {
-            width: 34px; height: 34px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-hairline);
+        .btn-cut {
+            width: 36px; height: 36px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             color: #94a3b8;
             display: none;
             align-items: center;
             justify-content: center;
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all 0.2s ease;
         }
-        .btn-clear-action:hover {
-            background: rgba(239, 68, 68, 0.18);
+        .btn-cut:hover {
+            background: rgba(239, 68, 68, 0.25);
             color: #ef4444;
-            border-color: rgba(239, 68, 68, 0.3);
+            border-color: #ef4444;
+            transform: scale(1.08);
         }
 
-        .btn-paste-action {
-            padding: 8px 14px;
-            border-radius: 11px;
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid var(--border-hairline);
-            color: #f1f5f9;
-            font-size: 0.82rem;
-            font-weight: 600;
+        .btn-paste {
+            padding: 10px 16px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 0.86rem;
+            font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 6px;
             transition: all 0.2s ease;
         }
-        .btn-paste-action:hover {
-            background: rgba(255, 255, 255, 0.14);
-            border-color: rgba(255, 255, 255, 0.2);
+        .btn-paste:hover {
+            background: rgba(255, 255, 255, 0.22);
+            border-color: rgba(255, 255, 255, 0.35);
+            transform: scale(1.04);
         }
 
-        /* Feedback Validation Line */
-        .validation-notice {
+        /* Live Green Badge */
+        .link-status {
             display: none;
-            font-size: 0.8rem;
-            font-weight: 600;
+            font-size: 0.82rem;
+            font-weight: 700;
             color: #10b981;
             margin-bottom: 16px;
             text-align: left;
@@ -321,171 +343,193 @@
             gap: 6px;
         }
 
-        /* Primary Action Button */
-        .btn-fetch-primary {
+        /* Glowing Fire Download Button */
+        .btn-download-fire {
             width: 100%;
-            background: #ffffff;
+            background: var(--sunset-glow);
             border: none;
-            color: #07080c;
-            padding: 17px;
-            border-radius: 16px;
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: -0.2px;
+            color: #ffffff;
+            padding: 19px;
+            border-radius: 18px;
+            font-size: 1.15rem;
+            font-weight: 900;
+            letter-spacing: 0.5px;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 12px 35px rgba(220, 39, 67, 0.55);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-top: 6px;
         }
-        .btn-fetch-primary:hover {
-            background: #f1f5f9;
-            transform: translateY(-1px);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15);
+        .btn-download-fire::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+            transform: skewX(-25deg);
+            transition: 0.75s;
         }
-        .btn-fetch-primary:active { transform: scale(0.99); }
+        .btn-download-fire:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 18px 45px rgba(220, 39, 67, 0.75), 0 0 30px rgba(240, 148, 51, 0.4);
+        }
+        .btn-download-fire:hover::before { left: 160%; }
+        .btn-download-fire:active { transform: scale(0.98); }
 
-        /* Processing Loader State */
-        #loader-state {
+        /* Animated High-Tech Radar Loader */
+        #loading-view {
             display: none;
-            padding: 24px 10px 10px 10px;
+            padding: 26px 10px 10px 10px;
             text-align: center;
         }
-        .precision-ring {
-            width: 50px; height: 50px;
+        .radar-spinner {
+            width: 64px; height: 64px;
             border-radius: 50%;
-            margin: 0 auto 16px auto;
-            border: 2.5px solid rgba(255, 255, 255, 0.08);
-            border-top-color: var(--brand-primary);
-            animation: spin-precise 0.8s linear infinite;
+            margin: 0 auto 18px auto;
+            position: relative;
+            background: radial-gradient(circle, rgba(220, 39, 67, 0.2) 0%, transparent 70%);
+            border: 2px solid rgba(220, 39, 67, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        @keyframes spin-precise { 100% { transform: rotate(360deg); } }
+        .radar-spinner::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #ff007f;
+            border-right-color: #f09433;
+            animation: spin 0.85s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        .loader-status-text { font-size: 1.1rem; font-weight: 700; margin-bottom: 5px; }
-        .loader-sub-text { font-size: 0.85rem; color: #64748b; }
+        .loader-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 5px; color: #ffffff; }
+        .loader-desc { font-size: 0.88rem; color: #94a3b8; }
 
-        .btn-abort {
+        .btn-reset-form {
             display: inline-flex;
             align-items: center;
             gap: 7px;
             margin-top: 18px;
             background: transparent;
-            border: 1px solid var(--border-hairline);
-            color: #94a3b8;
-            padding: 8px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #cbd5e1;
+            padding: 8px 20px;
             border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            font-size: 0.82rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.2s ease;
         }
-        .btn-abort:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: #ffffff;
-        }
+        .btn-reset-form:hover { background: rgba(255, 255, 255, 0.1); color: #ffffff; }
 
-        /* Pillars / Quality Grid */
-        .quality-specs {
+        /* Simple 3-Feature Cards */
+        .features-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
-            margin-top: 45px;
+            gap: 16px;
+            margin-top: 50px;
         }
-        .spec-item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-hairline);
-            border-radius: 18px;
-            padding: 22px 16px;
-            text-align: left;
+        .feat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 24px 16px;
+            text-align: center;
             transition: all 0.25s ease;
         }
-        .spec-item:hover {
-            background: rgba(255, 255, 255, 0.035);
-            border-color: var(--border-hover);
+        .feat-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(220, 39, 67, 0.3);
+            transform: translateY(-3px);
         }
-        .spec-icon {
-            font-size: 1.15rem;
-            color: var(--brand-primary);
-            margin-bottom: 12px;
+        .feat-icon-box {
+            width: 46px; height: 46px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin: 0 auto 14px auto;
+            color: #f09433;
         }
-        .spec-item:nth-child(2) .spec-icon { color: #a855f7; }
-        .spec-item:nth-child(3) .spec-icon { color: #ec4899; }
-        .spec-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 6px; }
-        .spec-desc { font-size: 0.78rem; color: #64748b; line-height: 1.5; }
+        .feat-card:nth-child(2) .feat-icon-box { color: #dc2743; }
+        .feat-card:nth-child(3) .feat-icon-box { color: #00f2fe; }
+        .feat-title { font-size: 0.96rem; font-weight: 800; margin-bottom: 6px; }
+        .feat-text { font-size: 0.8rem; color: #94a3b8; line-height: 1.4; }
 
-        /* Technical FAQ */
-        .faq-block {
-            margin-top: 55px;
+        /* Simple FAQs */
+        .faq-box {
+            margin-top: 50px;
             text-align: left;
         }
-        .faq-heading {
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin-bottom: 18px;
-            text-align: center;
-            letter-spacing: -0.4px;
-        }
-        .faq-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-hairline);
+        .faq-head { font-size: 1.4rem; font-weight: 800; margin-bottom: 18px; text-align: center; }
+        .faq-row {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.07);
             border-radius: 16px;
             margin-bottom: 10px;
             overflow: hidden;
         }
-        .faq-trigger {
-            padding: 17px 20px;
+        .faq-q {
+            padding: 18px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            font-weight: 600;
-            font-size: 0.92rem;
+            font-weight: 700;
+            font-size: 0.94rem;
             cursor: pointer;
             user-select: none;
         }
-        .faq-trigger i { font-size: 0.8rem; color: #64748b; transition: transform 0.25s ease; }
-        .faq-content {
+        .faq-q i { color: #dc2743; transition: transform 0.25s ease; }
+        .faq-a {
             padding: 0 20px 18px 20px;
-            font-size: 0.85rem;
+            font-size: 0.86rem;
             color: #94a3b8;
             line-height: 1.6;
             display: none;
         }
-        .faq-card.active .faq-content { display: block; }
-        .faq-card.active .faq-trigger i { transform: rotate(180deg); color: #ffffff; }
+        .faq-row.active .faq-a { display: block; }
+        .faq-row.active .faq-q i { transform: rotate(180deg); color: #ffffff; }
 
         /* Footer */
         footer {
-            border-top: 1px solid var(--border-hairline);
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
             padding: 36px 20px;
             text-align: center;
-            background: rgba(7, 8, 12, 0.5);
+            background: rgba(0, 0, 0, 0.5);
         }
         .footer-wrap { max-width: 650px; margin: 0 auto; }
-        .footer-nav {
+        .footer-links {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 22px;
             margin-bottom: 14px;
         }
-        .footer-anchor {
-            color: #64748b;
-            font-size: 0.82rem;
-            font-weight: 500;
+        .footer-link {
+            color: #94a3b8;
+            font-size: 0.84rem;
+            font-weight: 600;
             text-decoration: none;
             cursor: pointer;
             transition: color 0.2s ease;
         }
-        .footer-anchor:hover { color: #f1f5f9; }
-        .legal-notice { color: #475569; font-size: 0.78rem; font-weight: 400; }
+        .footer-link:hover { color: #f09433; }
+        .copy-text { color: #64748b; font-size: 0.8rem; }
 
-        /* Institutional Modals */
-        .legal-overlay {
+        /* Modals (Clean & Dark) */
+        .modal-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(3, 4, 7, 0.85);
+            background: rgba(0, 0, 0, 0.82);
             backdrop-filter: blur(16px);
             z-index: 9999;
             display: none;
@@ -493,10 +537,10 @@
             justify-content: center;
             padding: 20px;
         }
-        .legal-box {
-            background: #0d1017;
-            border: 1px solid var(--border-hairline);
-            border-radius: 22px;
+        .modal-card {
+            background: #0d101a;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
             padding: 32px 28px;
             max-width: 560px;
             width: 100%;
@@ -504,16 +548,16 @@
             overflow-y: auto;
             text-align: left;
             position: relative;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.9);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
         }
-        .modal-headline { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #ffffff; }
-        .modal-para { font-size: 0.85rem; line-height: 1.65; color: #94a3b8; margin-bottom: 14px; }
-        .modal-close-btn {
+        .modal-header-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 16px; color: #ffffff; }
+        .modal-body-text { font-size: 0.86rem; line-height: 1.7; color: #94a3b8; margin-bottom: 14px; }
+        .modal-exit-btn {
             position: absolute;
             top: 20px; right: 20px;
-            width: 30px; height: 30px;
+            width: 32px; height: 32px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.08);
             border: none;
             color: #ffffff;
             cursor: pointer;
@@ -521,155 +565,163 @@
             align-items: center;
             justify-content: center;
         }
-        .modal-close-btn:hover { background: rgba(255, 255, 255, 0.12); }
+        .modal-exit-btn:hover { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
 
-        /* Mobile Viewports */
+        /* Mobile Optimization */
         @media (max-width: 650px) {
-            h1 { font-size: 2.1rem; }
-            .workspace-card { padding: 26px 18px; border-radius: 20px; }
-            .quality-specs { grid-template-columns: 1fr; gap: 10px; }
-            .url-input { padding: 16px 105px 16px 44px; font-size: 0.92rem; }
-            .btn-fetch-primary { padding: 16px; font-size: 0.98rem; }
-            .brand-text { font-size: 1.45rem; }
-            .footer-nav { gap: 14px; flex-wrap: wrap; }
+            h1 { font-size: 2.15rem; }
+            .glass-card { padding: 28px 18px; border-radius: 24px; }
+            .features-row { grid-template-columns: 1fr; gap: 10px; }
+            .url-box { padding: 17px 110px 17px 46px; font-size: 0.94rem; }
+            .btn-download-fire { padding: 17px; font-size: 1.05rem; }
+            .logo-text { font-size: 1.55rem; }
+            .footer-links { gap: 14px; flex-wrap: wrap; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Precision Spotlight & Grid -->
-    <div class="spotlight-top"></div>
-    <div class="grid-canvas"></div>
+    <!-- Liquid Neon Aurora Flow (No Childish Balls/Bubbles) -->
+    <div class="aurora-bg">
+        <div class="aurora-flow-1"></div>
+        <div class="aurora-flow-2"></div>
+    </div>
+    <div class="cyber-grid"></div>
 
-    <!-- Header Navigation -->
+    <!-- Header Navbar -->
     <header>
-        <a href="/" class="brand-link">
-            <!-- Bespoke Geometric N Monogram (Exact match with Favicon) -->
-            <div class="brand-monogram">
+        <a href="/" class="logo-wrap">
+            <!-- Exact Matching Logo Box (Same as Favicon!) -->
+            <div class="logo-box">
                 <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
-                        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#6366f1"/>
-                            <stop offset="50%" stop-color="#a855f7"/>
-                            <stop offset="100%" stop-color="#ec4899"/>
+                        <linearGradient id="headerNl" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#f09433"/>
+                            <stop offset="30%" stop-color="#e6683c"/>
+                            <stop offset="60%" stop-color="#dc2743"/>
+                            <stop offset="100%" stop-color="#cc2366"/>
                         </linearGradient>
                     </defs>
-                    <path d="M30 72 V28 L50 52 V28 M70 28 V56 M58 46 L70 58 L82 46" stroke="url(#logoGrad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M32 70 V30 L52 54 V30 M70 30 V58 M58 48 L70 60 L82 48" stroke="url(#headerNl)" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
-            <span class="brand-text">NexLoad</span>
+            <span class="logo-text">NexLoad</span>
         </a>
-        <div class="system-pill">
-            <span class="pulse-indicator"></span>
-            <span>DIRECT PIPELINE</span>
+        <div class="server-pill">
+            <span class="pulse-dot"></span>
+            <span>FAST CDN ONLINE</span>
         </div>
     </header>
 
-    <!-- Main Workspace -->
+    <!-- Main Container -->
     <main>
-        <div class="eyebrow">
-            <i class="fa-solid fa-layer-group"></i> Lossless Media Architecture
+        <div class="fire-pill">
+            <i class="fa-solid fa-bolt"></i> 100% FREE • NO ADS • FULL HD
         </div>
         
-        <h1>Studio-Grade <br><span class="gradient-accent">Instagram Extraction</span></h1>
-        <p class="lead-text">Direct high-bitrate media processing. Download Reels, Videos, and Audio without watermarks or algorithmic re-encoding.</p>
+        <h1>Download Instagram <br><span class="fire-text">Reels & Videos in 1-Tap</span></h1>
+        <p class="simple-sub">Save any reel, video, or audio in original high quality. No watermark, no signup needed.</p>
 
-        <!-- Downloader Container -->
-        <div class="workspace-card">
+        <!-- Glowing Downloader Card -->
+        <div class="glass-card">
             
-            <!-- Type Tabs -->
-            <div class="selector-tabs">
-                <button type="button" class="tab-btn active" onclick="selectMediaType('mp4', this)">
+            <!-- Video / Audio Switcher -->
+            <div class="format-toggle">
+                <button type="button" class="format-btn active" onclick="setMode('mp4', this)">
                     <i class="fa-solid fa-film"></i> Video (MP4)
                 </button>
-                <button type="button" class="tab-btn" onclick="selectMediaType('mp3', this)">
-                    <i class="fa-solid fa-music"></i> Audio Stream (MP3)
+                <button type="button" class="format-btn" onclick="setMode('mp3', this)">
+                    <i class="fa-solid fa-music"></i> Audio Only (MP3)
                 </button>
             </div>
 
             <!-- Form -->
-            <form action="/download" method="post" id="extractionForm">
-                <input type="hidden" name="format" id="mediaFormat" value="mp4">
+            <form action="/download" method="post" id="dlForm">
+                <input type="hidden" name="format" id="formatField" value="mp4">
                 
-                <div class="input-bar">
-                    <i class="fa-solid fa-link input-lead-icon"></i>
-                    <input type="url" name="url" id="targetUrl" class="url-input" placeholder="Paste Instagram post or reel link..." required autocomplete="off">
+                <div class="input-holder">
+                    <i class="fa-solid fa-link input-icon"></i>
+                    <input type="url" name="url" id="urlInput" class="url-box" placeholder="Paste Instagram Reel link here..." required autocomplete="off">
                     
-                    <div class="action-tray">
-                        <button type="button" class="btn-clear-action" id="clearTrigger" onclick="wipeInput()" title="Clear link">
+                    <!-- 1-Tap Cut & Paste Buttons -->
+                    <div class="btn-tray">
+                        <button type="button" class="btn-cut" id="cutBtn" onclick="clearUrl()" title="Clear Link">
                             <i class="fa-solid fa-xmark"></i>
                         </button>
-                        <button type="button" class="btn-paste-action" onclick="fetchClipboard()">
+                        <button type="button" class="btn-paste" onclick="pasteReelLink()">
                             <i class="fa-regular fa-clipboard"></i> Paste
                         </button>
                     </div>
                 </div>
 
-                <div class="validation-notice" id="validationNotice">
-                    <i class="fa-solid fa-circle-check"></i> <span>Valid Instagram source target verified</span>
+                <!-- Live Instagram Detection Tag -->
+                <div class="link-status" id="linkStatus">
+                    <i class="fa-solid fa-circle-check"></i> <span>Instagram Reel Link Ready!</span>
                 </div>
 
-                <button type="submit" class="btn-fetch-primary" id="fetchButton">
-                    <i class="fa-solid fa-arrow-down-to-bracket"></i> Fetch Media
+                <button type="submit" class="btn-download-fire" id="fireBtn">
+                    <i class="fa-solid fa-cloud-arrow-down"></i> DOWNLOAD NOW
                 </button>
             </form>
 
-            <!-- Precision Loader -->
-            <div id="loader-state">
-                <div class="precision-ring"></div>
-                <div class="loader-status-text" id="statusHeading">Establishing Stream Handshake...</div>
-                <div class="loader-sub-text">Extracting original source bitrate from cloud edge nodes.</div>
-                <button type="button" class="btn-abort" onclick="revertWorkspace()">
-                    <i class="fa-solid fa-rotate-left"></i> Extract Another Target
+            <!-- Holographic Radar Spinner -->
+            <div id="loading-view">
+                <div class="radar-spinner">
+                    <i class="fa-solid fa-cloud-arrow-down fa-fade" style="font-size: 1.7rem; color: #dc2743;"></i>
+                </div>
+                <div class="loader-title" id="loaderTitle">Connecting to Instagram...</div>
+                <div class="loader-desc">Fetching original full quality video. Download starts in seconds!</div>
+                <button type="button" class="btn-reset-form" onclick="resetDownloader()">
+                    <i class="fa-solid fa-rotate-left"></i> Download Another Reel
                 </button>
             </div>
         </div>
 
-        <!-- System Specifications -->
-        <div class="quality-specs">
-            <div class="spec-item">
-                <i class="fa-solid fa-microchip spec-icon"></i>
-                <div class="spec-title">Lossless Bitrate</div>
-                <div class="spec-desc">Delivers original 1080p source video streams and high-fidelity 320kbps audio.</div>
+        <!-- 3 Simple Features -->
+        <div class="features-row">
+            <div class="feat-card">
+                <div class="feat-icon-box"><i class="fa-solid fa-bolt-lightning"></i></div>
+                <div class="feat-title">Super Fast</div>
+                <div class="feat-text">High-speed cloud processing. No waiting, instant direct download.</div>
             </div>
-            <div class="spec-item">
-                <i class="fa-solid fa-shield-halved spec-icon"></i>
-                <div class="spec-title">Stateless Session</div>
-                <div class="spec-desc">Zero user data logging, zero tracking telemetry, and no account requirements.</div>
+            <div class="feat-card">
+                <div class="feat-icon-box"><i class="fa-solid fa-gem"></i></div>
+                <div class="feat-title">Original Quality</div>
+                <div class="feat-text">Get original 1080p full resolution video and crisp clear audio.</div>
             </div>
-            <div class="spec-item">
-                <i class="fa-solid fa-bolt spec-icon"></i>
-                <div class="spec-title">Edge Acceleration</div>
-                <div class="spec-desc">Direct high-speed delivery pipeline engineered for low-latency creator workflows.</div>
+            <div class="feat-card">
+                <div class="feat-icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="feat-title">100% Free & Safe</div>
+                <div class="feat-text">No login required, no spammy ads. Clean and safe downloads.</div>
             </div>
         </div>
 
-        <!-- Technical FAQs -->
-        <div class="faq-block">
-            <h3 class="faq-heading">Frequently Asked Questions</h3>
+        <!-- Simple FAQs -->
+        <div class="faq-box">
+            <h3 class="faq-head">Frequently Asked Questions</h3>
             
-            <div class="faq-card" onclick="toggleAccordion(this)">
-                <div class="faq-trigger">
-                    <span>Does NexLoad compress or alter original media?</span>
+            <div class="faq-row" onclick="toggleFaqRow(this)">
+                <div class="faq-q">
+                    <span>Is NexLoad really free?</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
-                <div class="faq-content">No. NexLoad interfaces directly with the source media manifest to fetch the highest available bitrate without applying secondary compression or watermarking.</div>
+                <div class="faq-a">Yes, NexLoad is 100% free with unlimited downloads. You don't need to pay anything or create an account.</div>
             </div>
 
-            <div class="faq-card" onclick="toggleAccordion(this)">
-                <div class="faq-trigger">
-                    <span>Is this service completely free to use?</span>
+            <div class="faq-row" onclick="toggleFaqRow(this)">
+                <div class="faq-q">
+                    <span>Where are the downloaded reels saved?</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
-                <div class="faq-content">Yes. NexLoad is engineered as a stateless, open tool with unrestricted download quotas and zero mandatory subscription fees.</div>
+                <div class="faq-a">Videos are saved directly to your phone's Gallery / Photos or your computer's "Downloads" folder.</div>
             </div>
 
-            <div class="faq-card" onclick="toggleAccordion(this)">
-                <div class="faq-trigger">
-                    <span>Where are downloaded assets saved?</span>
+            <div class="faq-row" onclick="toggleFaqRow(this)">
+                <div class="faq-q">
+                    <span>Can I download only MP3 audio from a reel?</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
-                <div class="faq-content">Files are dispatched directly to your browser's default storage repository (typically the Downloads folder or mobile camera gallery).</div>
+                <div class="faq-a">Yes! Just select the "Audio Only (MP3)" tab above, paste the link, and download the trending audio directly.</div>
             </div>
         </div>
     </main>
@@ -677,155 +729,156 @@
     <!-- Footer -->
     <footer>
         <div class="footer-wrap">
-            <div class="footer-nav">
-                <a class="footer-anchor" onclick="showLegal('privacyDoc')">Privacy Policy</a>
-                <span style="color: rgba(255,255,255,0.1)">•</span>
-                <a class="footer-anchor" onclick="showLegal('termsDoc')">Terms of Service</a>
-                <span style="color: rgba(255,255,255,0.1)">•</span>
-                <a class="footer-anchor" onclick="showLegal('contactDoc')">Contact Inquiries</a>
+            <div class="footer-links">
+                <a class="footer-link" onclick="openLegal('privacyModal')">Privacy Policy</a>
+                <span style="color: rgba(255,255,255,0.15)">•</span>
+                <a class="footer-link" onclick="openLegal('termsModal')">Terms of Service</a>
+                <span style="color: rgba(255,255,255,0.15)">•</span>
+                <a class="footer-link" onclick="openLegal('contactModal')">Contact Us</a>
             </div>
-            <p class="legal-notice">© 2026 NexLoad. Engineered for performance-driven creator pipelines.</p>
+            <p class="copy-text">© 2026 NexLoad. Made for creators and everyday users.</p>
         </div>
     </footer>
 
-    <!-- Modals -->
-    <div class="legal-overlay" id="privacyDoc">
-        <div class="legal-box">
-            <button class="modal-close-btn" onclick="dismissLegal('privacyDoc')"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="modal-headline">Privacy Policy</h3>
-            <p class="modal-para"><strong>Effective Scope:</strong> 2026</p>
-            <p class="modal-para">At <strong>NexLoad</strong> (accessible at https://nexload.online), data confidentiality is a core architecture principle. This document defines our stateless operational model.</p>
-            <p class="modal-para"><strong>1. Zero Personal Data Retention:</strong> NexLoad does not capture, harvest, or persist user identities, authentication credentials, or device identifiers. All extraction jobs are evaluated in temporary memory and flushed immediately upon delivery.</p>
-            <p class="modal-para"><strong>2. Operational Logging:</strong> Standard anonymous server logs retain technical telemetry solely for firewall security, infrastructure load-balancing, and network attack deterrence.</p>
-            <p class="modal-para"><strong>3. Functional Handshakes:</strong> A transient functional token (<code>download_done</code>) is applied strictly to coordinate browser download triggers. No third-party profiling or tracking cookies are executed.</p>
+    <!-- Privacy Policy Modal -->
+    <div class="modal-bg" id="privacyModal">
+        <div class="modal-card">
+            <button class="modal-exit-btn" onclick="closeLegal('privacyModal')"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="modal-header-title">Privacy Policy</h3>
+            <p class="modal-body-text"><strong>Last Updated:</strong> 2026</p>
+            <p class="modal-body-text">Welcome to <strong>NexLoad</strong> (https://nexload.online). Your privacy is extremely important to us.</p>
+            <p class="modal-body-text"><strong>1. No Data Stored:</strong> We do not collect, save, or track your personal details, passwords, or downloaded media. Everything is processed directly in real-time memory.</p>
+            <p class="modal-body-text"><strong>2. Safe & Private:</strong> You can download reels without logging in or providing any personal information.</p>
+            <p class="modal-body-text"><strong>3. Cookies:</strong> We only use a temporary technical cookie (<code>download_done</code>) to automatically reset the download button once your file starts saving.</p>
         </div>
     </div>
 
-    <div class="legal-overlay" id="termsDoc">
-        <div class="legal-box">
-            <button class="modal-close-btn" onclick="dismissLegal('termsDoc')"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="modal-headline">Terms of Service</h3>
-            <p class="modal-para">By accessing and operating <strong>NexLoad</strong>, you acknowledge and agree to the operational provisions outlined herein.</p>
-            <p class="modal-para"><strong>1. Authorized Archival Use:</strong> NexLoad is constructed exclusively for personal backup, fair use, and authorized research workflows. Users maintain sole legal accountability for honoring third-party intellectual property laws.</p>
-            <p class="modal-para"><strong>2. Warranty Disclaimer:</strong> The utility is provisioned on an "as-is" basis without warranties or availability guarantees. NexLoad does not host or index copyrighted media on its infrastructure.</p>
-            <p class="modal-para"><strong>3. Liability Boundary:</strong> NexLoad operators assume zero liability for downstream compliance, usage patterns, or third-party platform policy enforcement.</p>
+    <!-- Terms of Service Modal -->
+    <div class="modal-bg" id="termsModal">
+        <div class="modal-card">
+            <button class="modal-exit-btn" onclick="closeLegal('termsModal')"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="modal-header-title">Terms of Service</h3>
+            <p class="modal-body-text">By using <strong>NexLoad</strong>, you agree to these simple terms:</p>
+            <p class="modal-body-text"><strong>1. Personal Use:</strong> NexLoad is designed for personal backup and offline viewing. Users are responsible for respecting content creators' copyrights.</p>
+            <p class="modal-body-text"><strong>2. No Hosting:</strong> NexLoad does not host or store any media files on its servers. It only helps users save publicly accessible content.</p>
         </div>
     </div>
 
-    <div class="legal-overlay" id="contactDoc">
-        <div class="legal-box">
-            <button class="modal-close-btn" onclick="dismissLegal('contactDoc')"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="modal-headline">Contact & Operations</h3>
-            <p class="modal-para">For technical inquiries, bug disclosures, or infrastructure feedback:</p>
-            <p class="modal-para" style="color: var(--brand-primary); font-weight: 700; font-size: 1.05rem;">
+    <!-- Contact Support Modal -->
+    <div class="modal-bg" id="contactModal">
+        <div class="modal-card">
+            <button class="modal-exit-btn" onclick="closeLegal('contactModal')"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="modal-header-title">Contact Us</h3>
+            <p class="modal-body-text">Have questions, feedback, or need help with a download?</p>
+            <p class="modal-body-text">Email us directly at:</p>
+            <p class="modal-body-text" style="color: #f09433; font-weight: 700; font-size: 1.05rem;">
                 <i class="fa-regular fa-envelope me-2"></i> support@nexload.online
             </p>
-            <p class="modal-para">Engineering inquiries are reviewed during standard operational cycles.</p>
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- Core Interactive JavaScript -->
     <script>
-        const targetUrl = document.getElementById('targetUrl');
-        const clearTrigger = document.getElementById('clearTrigger');
-        const validationNotice = document.getElementById('validationNotice');
-        const extractionForm = document.getElementById('extractionForm');
-        const loaderState = document.getElementById('loaderState') || document.getElementById('loader-state');
-        const statusHeading = document.getElementById('statusHeading');
+        const urlInput = document.getElementById('urlInput');
+        const cutBtn = document.getElementById('cutBtn');
+        const linkStatus = document.getElementById('linkStatus');
+        const form = document.getElementById('dlForm');
+        const loadingView = document.getElementById('loading-view');
+        const loaderTitle = document.getElementById('loaderTitle');
 
-        // Dynamic Clear Button & Validation Notice
-        targetUrl.addEventListener('input', function() {
+        // Show/Hide Cut Button & Detection Tag
+        urlInput.addEventListener('input', function() {
             const val = this.value.trim();
             if (val.length > 0) {
-                clearTrigger.style.display = 'flex';
+                cutBtn.style.display = 'flex';
                 if (val.includes('instagram.com')) {
-                    validationNotice.style.display = 'flex';
+                    linkStatus.style.display = 'flex';
                 } else {
-                    validationNotice.style.display = 'none';
+                    linkStatus.style.display = 'none';
                 }
             } else {
-                clearTrigger.style.display = 'none';
-                validationNotice.style.display = 'none';
+                cutBtn.style.display = 'none';
+                linkStatus.style.display = 'none';
             }
         });
 
-        // 1-Tap Clear Input Action
-        function wipeInput() {
-            targetUrl.value = '';
-            clearTrigger.style.display = 'none';
-            validationNotice.style.display = 'none';
-            targetUrl.focus();
+        // 1-Tap Cut / Clear Button
+        function clearUrl() {
+            urlInput.value = '';
+            cutBtn.style.display = 'none';
+            linkStatus.style.display = 'none';
+            urlInput.focus();
         }
 
-        // 1-Tap Native Clipboard Paste
-        async function fetchClipboard() {
+        // 1-Tap Clipboard Paste Button
+        async function pasteReelLink() {
             try {
                 const text = await navigator.clipboard.readText();
                 if (text && text.trim().length > 0) {
-                    targetUrl.value = text.trim();
-                    clearTrigger.style.display = 'flex';
+                    urlInput.value = text.trim();
+                    cutBtn.style.display = 'flex';
                     if (text.includes('instagram.com')) {
-                        validationNotice.style.display = 'flex';
+                        linkStatus.style.display = 'flex';
                     }
                 }
             } catch (err) {
-                alert("Please grant clipboard permission or paste manually.");
+                alert("Please allow clipboard permission or paste manually.");
             }
         }
 
-        // Format Switcher
-        function selectMediaType(type, btn) {
-            document.getElementById('mediaFormat').value = type;
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        // Video / Audio Switcher
+        function setMode(mode, btn) {
+            document.getElementById('formatField').value = mode;
+            document.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         }
 
-        // Execution & Status Progression
-        extractionForm.onsubmit = function() {
-            extractionForm.style.display = 'none';
-            validationNotice.style.display = 'none';
-            loaderState.style.display = 'block';
-            statusHeading.innerText = "Initiating Media Handshake...";
+        // Form Submit & Download Sequence
+        form.onsubmit = function() {
+            form.style.display = 'none';
+            linkStatus.style.display = 'none';
+            loadingView.style.display = 'block';
+            loaderTitle.innerText = "Connecting to Instagram...";
 
-            setTimeout(() => { statusHeading.innerText = "Extracting Uncompressed Stream..."; }, 1500);
-            setTimeout(() => { statusHeading.innerText = "Packaging High-Speed Asset..."; }, 3500);
+            setTimeout(() => { loaderTitle.innerText = "Extracting Full HD Video..."; }, 1400);
+            setTimeout(() => { loaderTitle.innerText = "Download Starting..."; }, 3200);
 
-            // Clean cookie before new trigger
+            // Clean cookie
             document.cookie = "download_done=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
-            // Check every 500ms if server dispatched the file
-            const checkSyncTimer = setInterval(function() {
+            // Auto-detect when download finishes
+            const doneCheck = setInterval(function() {
                 if (document.cookie.indexOf('download_done=yes') !== -1) {
-                    clearInterval(checkSyncTimer);
+                    clearInterval(doneCheck);
                     document.cookie = "download_done=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                    revertWorkspace();
+                    resetDownloader();
                 }
             }, 500);
         };
 
-        function revertWorkspace() {
-            extractionForm.style.display = 'block';
-            loaderState.style.display = 'none';
-            targetUrl.value = '';
-            clearTrigger.style.display = 'none';
-            validationNotice.style.display = 'none';
+        function resetDownloader() {
+            form.style.display = 'block';
+            loadingView.style.display = 'none';
+            urlInput.value = '';
+            cutBtn.style.display = 'none';
+            linkStatus.style.display = 'none';
         }
 
-        // Technical FAQ Accordion
-        function toggleAccordion(card) {
-            card.classList.toggle('active');
+        // FAQ Toggle
+        function toggleFaqRow(elem) {
+            elem.classList.toggle('active');
         }
 
-        // Institutional Legal Modals
-        function showLegal(id) {
-            document.getElementById(id).style.display = 'flex';
+        // Modal Popups
+        function openLegal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
         }
-        function dismissLegal(id) {
-            document.getElementById(id).style.display = 'none';
+        function closeLegal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
         }
-        window.onclick = function(event) {
-            if (event.target.classList.contains('legal-overlay')) {
-                event.target.style.display = 'none';
+        window.onclick = function(e) {
+            if (e.target.classList.contains('modal-bg')) {
+                e.target.style.display = 'none';
             }
         }
     </script>
