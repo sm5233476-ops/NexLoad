@@ -3,35 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>NexLoad — Free Instagram Reels & Video Downloader</title>
+    <title>NexLoad — Instagram Reels Downloader</title>
     
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="-VzraoSDqAsfmqMbDd7E-etkM2dSOuYPgcTAcMhXk8k" />
     
-    <!-- SEO & Social Sharing Tags -->
-    <meta name="description" content="Download Instagram Reels, Videos, and MP3 Audio in original Full HD quality. 100% Free, no watermark, and no annoying ads.">
-    <meta property="og:title" content="NexLoad — 1-Tap Instagram Downloader">
-    <meta property="og:description" content="Save Instagram Reels & Videos in Original HD. Fast, Free, No Watermark.">
+    <!-- SEO & Social Sharing -->
+    <meta name="description" content="Download Instagram Reels and Audio in original high quality. Fast, free, and simple.">
+    <meta property="og:title" content="NexLoad — Instagram Reels Downloader">
+    <meta property="og:description" content="Save Instagram Reels & Audio in original quality. Fast & Free.">
     <meta property="og:url" content="https://nexload.online">
     <meta property="og:type" content="website">
 
-    <!-- Official Matching Glowing Favicon (Tab Logo) -->
+    <!-- Official Unified Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='nl' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23f09433'/><stop offset='30%25' stop-color='%23e6683c'/><stop offset='60%25' stop-color='%23dc2743'/><stop offset='100%25' stop-color='%23cc2366'/></linearGradient></defs><rect width='100' height='100' rx='26' fill='%23080a12'/><rect x='2' y='2' width='96' height='96' rx='24' stroke='url(%23nl)' stroke-width='4' fill='none'/><path d='M32 70 V30 L52 54 V30 M70 30 V58 M58 48 L70 60 L82 48' stroke='url(%23nl)' stroke-width='8.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>">
 
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         :root {
-            --bg-dark: #05060c;
-            --card-glass: rgba(14, 18, 32, 0.82);
+            --bg-dark: #07080f;
+            --card-glass: rgba(14, 18, 30, 0.78);
             --sunset-glow: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            --cyan-glow: #00f2fe;
-            --pink-glow: #ff007f;
-            --border-glow: rgba(255, 255, 255, 0.12);
+            --border-glow: rgba(255, 255, 255, 0.09);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -44,211 +42,136 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            position: relative;
         }
 
-        /* Fluid Neon Aurora Flow (No Childish Bubbles!) */
+        /* Subtle Smooth Background Ambient */
         .aurora-bg {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
             pointer-events: none;
             overflow: hidden;
         }
-        .aurora-flow-1 {
+        .aurora-glow-1 {
             position: absolute;
-            top: -30%; left: -10%;
-            width: 120%; height: 80%;
-            background: radial-gradient(ellipse at center, rgba(220, 39, 67, 0.22) 0%, rgba(188, 24, 136, 0.12) 45%, transparent 70%);
-            filter: blur(100px);
-            animation: flow-wave 12s ease-in-out infinite alternate;
+            top: -15%; left: 50%;
+            transform: translateX(-50%);
+            width: 550px; height: 350px;
+            background: radial-gradient(ellipse at center, rgba(220, 39, 67, 0.18) 0%, transparent 70%);
+            filter: blur(80px);
         }
-        .aurora-flow-2 {
+        .aurora-glow-2 {
             position: absolute;
-            bottom: -20%; right: -10%;
-            width: 120%; height: 70%;
-            background: radial-gradient(ellipse at center, rgba(0, 242, 254, 0.16) 0%, rgba(121, 40, 202, 0.14) 40%, transparent 70%);
-            filter: blur(110px);
-            animation: flow-wave 16s ease-in-out infinite alternate-reverse;
-        }
-        @keyframes flow-wave {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-30px, 40px) scale(1.08); }
-            100% { transform: translate(30px, -30px) scale(0.96); }
+            bottom: 0; right: -10%;
+            width: 450px; height: 350px;
+            background: radial-gradient(ellipse at center, rgba(121, 40, 202, 0.12) 0%, transparent 70%);
+            filter: blur(90px);
         }
 
-        /* Subtle Cyber Grid Lines */
-        .cyber-grid {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        /* Header Navbar */
+        /* Clean Header */
         header {
-            padding: 22px 20px;
+            padding: 18px 20px;
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            max-width: 1050px;
-            width: 92%;
-            margin: 0 auto;
         }
         .logo-wrap {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 11px;
             text-decoration: none;
         }
         .logo-box {
-            width: 44px; height: 44px;
+            width: 38px; height: 38px;
             background: #080a12;
-            border: 1.5px solid rgba(220, 39, 67, 0.4);
-            border-radius: 14px;
+            border: 1.2px solid rgba(220, 39, 67, 0.45);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 20px rgba(220, 39, 67, 0.4);
-            transition: all 0.3s ease;
-        }
-        .logo-wrap:hover .logo-box {
-            transform: scale(1.08) rotate(4deg);
-            border-color: #ff007f;
-            box-shadow: 0 0 30px rgba(255, 0, 127, 0.6);
+            box-shadow: 0 0 16px rgba(220, 39, 67, 0.35);
         }
         .logo-text {
-            font-size: 1.85rem;
-            font-weight: 900;
+            font-size: 1.55rem;
+            font-weight: 800;
             letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #ffffff 40%, #fed7aa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ffffff;
         }
-
-        .server-pill {
-            background: rgba(0, 242, 254, 0.08);
-            border: 1px solid rgba(0, 242, 254, 0.3);
-            color: var(--cyan-glow);
-            font-size: 0.76rem;
-            font-weight: 700;
-            padding: 6px 14px;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            letter-spacing: 0.5px;
-        }
-        .pulse-dot {
-            width: 8px; height: 8px;
-            border-radius: 50%;
-            background: var(--cyan-glow);
-            box-shadow: 0 0 10px var(--cyan-glow);
-            animation: blink 1.4s infinite;
-        }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
         /* Main Container */
         main {
-            max-width: 660px;
+            max-width: 580px;
             width: 92%;
-            margin: 15px auto 55px auto;
+            margin: 10px auto 40px auto;
             text-align: center;
         }
 
-        /* Hero Badges & Simple Headlines */
-        .fire-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 7px 18px;
-            border-radius: 50px;
-            background: rgba(220, 39, 67, 0.12);
-            border: 1px solid rgba(220, 39, 67, 0.35);
-            color: #ff4d6d;
-            font-size: 0.8rem;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 25px rgba(220, 39, 67, 0.25);
-        }
-
+        /* Clean Headline */
         h1 {
-            font-size: 2.7rem;
+            font-size: 2.1rem;
             font-weight: 900;
-            line-height: 1.15;
-            letter-spacing: -1px;
-            margin-bottom: 12px;
+            line-height: 1.2;
+            letter-spacing: -0.6px;
+            margin-bottom: 8px;
         }
         .fire-text {
             background: var(--sunset-glow);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 40px rgba(220, 39, 67, 0.3);
         }
-        .simple-sub {
+        .clean-sub {
             color: #94a3b8;
-            font-size: 1.05rem;
-            margin-bottom: 30px;
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            font-weight: 500;
         }
 
-        /* Super Glowing Downloader Card */
+        /* Downloader Card */
         .glass-card {
             background: var(--card-glass);
-            backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
-            border: 1.5px solid var(--border-glow);
-            border-radius: 28px;
-            padding: 36px 28px;
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85),
-                        0 0 40px rgba(220, 39, 67, 0.15);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        .glass-card:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9),
-                        0 0 50px rgba(220, 39, 67, 0.25);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            padding: 26px 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(220, 39, 67, 0.08);
         }
 
         /* Format Tabs (Video / Audio) */
         .format-toggle {
             display: flex;
-            background: rgba(4, 5, 10, 0.75);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 5px;
-            margin-bottom: 22px;
-            gap: 5px;
+            background: rgba(4, 5, 10, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 4px;
+            margin-bottom: 18px;
+            gap: 4px;
         }
         .format-btn {
             flex: 1;
-            padding: 12px;
+            padding: 10px;
             border: none;
             background: transparent;
             color: #94a3b8;
             font-weight: 700;
-            font-size: 0.95rem;
-            border-radius: 12px;
+            font-size: 0.9rem;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 7px;
         }
         .format-btn.active {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.09);
             color: #ffffff;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.08);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
         }
 
-        /* Input Bar with Paste & Cut Action */
+        /* Input Bar */
         .input-holder {
             position: relative;
             display: flex;
@@ -257,141 +180,119 @@
         }
         .input-icon {
             position: absolute;
-            left: 18px;
+            left: 16px;
             color: #64748b;
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             pointer-events: none;
-            transition: color 0.3s ease;
         }
         .url-box {
             width: 100%;
-            background: rgba(0, 0, 0, 0.65);
-            border: 1.8px solid rgba(255, 255, 255, 0.1);
-            padding: 19px 115px 19px 50px;
-            border-radius: 18px;
+            background: rgba(0, 0, 0, 0.55);
+            border: 1.5px solid rgba(255, 255, 255, 0.09);
+            padding: 16px 96px 16px 44px;
+            border-radius: 16px;
             color: #ffffff;
-            font-size: 1rem;
+            font-size: 0.94rem;
             font-weight: 500;
             outline: none;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
-        .url-box::placeholder { color: #526177; font-size: 0.95rem; }
+        .url-box::placeholder { color: #526177; font-size: 0.9rem; }
         .url-box:focus {
             border-color: #dc2743;
-            box-shadow: 0 0 30px rgba(220, 39, 67, 0.4);
+            box-shadow: 0 0 24px rgba(220, 39, 67, 0.3);
         }
-        .url-box:focus ~ .input-icon { color: #dc2743; }
 
-        /* Integrated Buttons (Paste + Cut) */
+        /* Paste & Cut Buttons */
         .btn-tray {
             position: absolute;
-            right: 8px;
+            right: 6px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
         .btn-cut {
-            width: 36px; height: 36px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            width: 32px; height: 32px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: #94a3b8;
             display: none;
             align-items: center;
             justify-content: center;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: 0.15s;
         }
         .btn-cut:hover {
-            background: rgba(239, 68, 68, 0.25);
+            background: rgba(239, 68, 68, 0.2);
             color: #ef4444;
-            border-color: #ef4444;
-            transform: scale(1.08);
         }
 
         .btn-paste {
-            padding: 10px 16px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px 14px;
+            border-radius: 11px;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.14);
             color: #ffffff;
-            font-size: 0.86rem;
+            font-size: 0.82rem;
             font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 6px;
-            transition: all 0.2s ease;
+            transition: 0.2s;
         }
         .btn-paste:hover {
-            background: rgba(255, 255, 255, 0.22);
-            border-color: rgba(255, 255, 255, 0.35);
-            transform: scale(1.04);
+            background: rgba(255, 255, 255, 0.18);
         }
 
-        /* Live Green Badge */
+        /* Detection Badge */
         .link-status {
             display: none;
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             font-weight: 700;
             color: #10b981;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             text-align: left;
-            padding-left: 6px;
+            padding-left: 4px;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
-        /* Glowing Fire Download Button */
-        .btn-download-fire {
+        /* Download Button */
+        .btn-download-clean {
             width: 100%;
             background: var(--sunset-glow);
             border: none;
             color: #ffffff;
-            padding: 19px;
-            border-radius: 18px;
-            font-size: 1.15rem;
-            font-weight: 900;
-            letter-spacing: 0.5px;
+            padding: 17px;
+            border-radius: 16px;
+            font-size: 1.05rem;
+            font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 12px 35px rgba(220, 39, 67, 0.55);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 10px 28px rgba(220, 39, 67, 0.45);
+            transition: all 0.25s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 9px;
         }
-        .btn-download-fire::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 60%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-            transform: skewX(-25deg);
-            transition: 0.75s;
-        }
-        .btn-download-fire:hover {
-            transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 18px 45px rgba(220, 39, 67, 0.75), 0 0 30px rgba(240, 148, 51, 0.4);
-        }
-        .btn-download-fire:hover::before { left: 160%; }
-        .btn-download-fire:active { transform: scale(0.98); }
+        .btn-download-clean:active { transform: scale(0.98); }
 
-        /* Animated High-Tech Radar Loader */
+        /* Loader */
         #loading-view {
             display: none;
-            padding: 26px 10px 10px 10px;
+            padding: 20px 10px 6px 10px;
             text-align: center;
         }
         .radar-spinner {
-            width: 64px; height: 64px;
+            width: 52px; height: 52px;
             border-radius: 50%;
-            margin: 0 auto 18px auto;
+            margin: 0 auto 14px auto;
             position: relative;
-            background: radial-gradient(circle, rgba(220, 39, 67, 0.2) 0%, transparent 70%);
-            border: 2px solid rgba(220, 39, 67, 0.3);
+            background: radial-gradient(circle, rgba(220, 39, 67, 0.15) 0%, transparent 70%);
+            border: 2px solid rgba(220, 39, 67, 0.25);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -399,101 +300,86 @@
         .radar-spinner::after {
             content: '';
             position: absolute;
-            inset: -4px;
+            inset: -3px;
             border-radius: 50%;
-            border: 3px solid transparent;
+            border: 2.5px solid transparent;
             border-top-color: #ff007f;
             border-right-color: #f09433;
             animation: spin 0.85s linear infinite;
         }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        .loader-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 5px; color: #ffffff; }
-        .loader-desc { font-size: 0.88rem; color: #94a3b8; }
+        .loader-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; }
+        .loader-desc { font-size: 0.82rem; color: #94a3b8; }
 
         .btn-reset-form {
             display: inline-flex;
             align-items: center;
-            gap: 7px;
-            margin-top: 18px;
+            gap: 6px;
+            margin-top: 14px;
             background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.18);
             color: #cbd5e1;
-            padding: 8px 20px;
+            padding: 7px 18px;
             border-radius: 30px;
-            font-size: 0.82rem;
+            font-size: 0.78rem;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s ease;
         }
-        .btn-reset-form:hover { background: rgba(255, 255, 255, 0.1); color: #ffffff; }
 
-        /* Simple 3-Feature Cards */
+        /* 3 Clean Feature Boxes */
         .features-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-top: 50px;
+            gap: 12px;
+            margin-top: 35px;
         }
         .feat-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 24px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 18px;
+            padding: 18px 12px;
             text-align: center;
-            transition: all 0.25s ease;
-        }
-        .feat-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(220, 39, 67, 0.3);
-            transform: translateY(-3px);
         }
         .feat-icon-box {
-            width: 46px; height: 46px;
-            border-radius: 14px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            margin: 0 auto 14px auto;
+            font-size: 1.15rem;
+            margin-bottom: 8px;
             color: #f09433;
         }
         .feat-card:nth-child(2) .feat-icon-box { color: #dc2743; }
         .feat-card:nth-child(3) .feat-icon-box { color: #00f2fe; }
-        .feat-title { font-size: 0.96rem; font-weight: 800; margin-bottom: 6px; }
-        .feat-text { font-size: 0.8rem; color: #94a3b8; line-height: 1.4; }
+        .feat-title { font-size: 0.86rem; font-weight: 700; margin-bottom: 4px; }
+        .feat-text { font-size: 0.75rem; color: #94a3b8; line-height: 1.35; }
 
-        /* Simple FAQs */
+        /* FAQs */
         .faq-box {
-            margin-top: 50px;
+            margin-top: 40px;
             text-align: left;
         }
-        .faq-head { font-size: 1.4rem; font-weight: 800; margin-bottom: 18px; text-align: center; }
+        .faq-head { font-size: 1.25rem; font-weight: 800; margin-bottom: 14px; text-align: center; }
         .faq-row {
-            background: rgba(255, 255, 255, 0.025);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 16px;
-            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            margin-bottom: 8px;
             overflow: hidden;
         }
         .faq-q {
-            padding: 18px 20px;
+            padding: 14px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             font-weight: 700;
-            font-size: 0.94rem;
+            font-size: 0.88rem;
             cursor: pointer;
             user-select: none;
         }
-        .faq-q i { color: #dc2743; transition: transform 0.25s ease; }
+        .faq-q i { color: #dc2743; font-size: 0.75rem; transition: transform 0.25s ease; }
         .faq-a {
-            padding: 0 20px 18px 20px;
-            font-size: 0.86rem;
+            padding: 0 16px 14px 16px;
+            font-size: 0.82rem;
             color: #94a3b8;
-            line-height: 1.6;
+            line-height: 1.5;
             display: none;
         }
         .faq-row.active .faq-a { display: block; }
@@ -501,61 +387,59 @@
 
         /* Footer */
         footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.07);
-            padding: 36px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 28px 16px;
             text-align: center;
-            background: rgba(0, 0, 0, 0.5);
         }
-        .footer-wrap { max-width: 650px; margin: 0 auto; }
+        .footer-wrap { max-width: 580px; margin: 0 auto; }
         .footer-links {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 22px;
-            margin-bottom: 14px;
+            gap: 16px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
         }
         .footer-link {
             color: #94a3b8;
-            font-size: 0.84rem;
+            font-size: 0.8rem;
             font-weight: 600;
             text-decoration: none;
             cursor: pointer;
-            transition: color 0.2s ease;
         }
         .footer-link:hover { color: #f09433; }
-        .copy-text { color: #64748b; font-size: 0.8rem; }
+        .copy-text { color: #64748b; font-size: 0.76rem; }
 
-        /* Modals (Clean & Dark) */
+        /* Modals */
         .modal-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.82);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(16px);
             z-index: 9999;
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 16px;
         }
         .modal-card {
             background: #0d101a;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 24px;
-            padding: 32px 28px;
-            max-width: 560px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 26px 20px;
+            max-width: 520px;
             width: 100%;
             max-height: 80vh;
             overflow-y: auto;
             text-align: left;
             position: relative;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
         }
-        .modal-header-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 16px; color: #ffffff; }
-        .modal-body-text { font-size: 0.86rem; line-height: 1.7; color: #94a3b8; margin-bottom: 14px; }
+        .modal-header-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 12px; }
+        .modal-body-text { font-size: 0.82rem; line-height: 1.6; color: #94a3b8; margin-bottom: 12px; }
         .modal-exit-btn {
             position: absolute;
-            top: 20px; right: 20px;
-            width: 32px; height: 32px;
+            top: 16px; right: 16px;
+            width: 28px; height: 28px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.08);
             border: none;
@@ -565,35 +449,31 @@
             align-items: center;
             justify-content: center;
         }
-        .modal-exit-btn:hover { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
 
-        /* Mobile Optimization */
-        @media (max-width: 650px) {
-            h1 { font-size: 2.15rem; }
-            .glass-card { padding: 28px 18px; border-radius: 24px; }
-            .features-row { grid-template-columns: 1fr; gap: 10px; }
-            .url-box { padding: 17px 110px 17px 46px; font-size: 0.94rem; }
-            .btn-download-fire { padding: 17px; font-size: 1.05rem; }
-            .logo-text { font-size: 1.55rem; }
-            .footer-links { gap: 14px; flex-wrap: wrap; }
+        /* Mobile Fixes */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.85rem; }
+            .glass-card { padding: 22px 16px; }
+            .features-row { grid-template-columns: 1fr; gap: 8px; }
+            .url-box { padding: 15px 90px 15px 40px; font-size: 0.9rem; }
+            .btn-download-clean { padding: 15px; font-size: 1rem; }
+            .logo-text { font-size: 1.4rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Liquid Neon Aurora Flow (No Childish Balls/Bubbles) -->
+    <!-- Soft Ambient Light -->
     <div class="aurora-bg">
-        <div class="aurora-flow-1"></div>
-        <div class="aurora-flow-2"></div>
+        <div class="aurora-glow-1"></div>
+        <div class="aurora-glow-2"></div>
     </div>
-    <div class="cyber-grid"></div>
 
-    <!-- Header Navbar -->
+    <!-- Clean Header -->
     <header>
         <a href="/" class="logo-wrap">
-            <!-- Exact Matching Logo Box (Same as Favicon!) -->
             <div class="logo-box">
-                <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="22" height="22" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="headerNl" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#f09433"/>
@@ -607,22 +487,14 @@
             </div>
             <span class="logo-text">NexLoad</span>
         </a>
-        <div class="server-pill">
-            <span class="pulse-dot"></span>
-            <span>FAST CDN ONLINE</span>
-        </div>
     </header>
 
     <!-- Main Container -->
     <main>
-        <div class="fire-pill">
-            <i class="fa-solid fa-bolt"></i> 100% FREE • NO ADS • FULL HD
-        </div>
-        
-        <h1>Download Instagram <br><span class="fire-text">Reels & Videos in 1-Tap</span></h1>
-        <p class="simple-sub">Save any reel, video, or audio in original high quality. No watermark, no signup needed.</p>
+        <h1>Instagram <span class="fire-text">Reels</span> Downloader</h1>
+        <p class="clean-sub">Save reels and audio in original quality. Fast & free.</p>
 
-        <!-- Glowing Downloader Card -->
+        <!-- Downloader Card -->
         <div class="glass-card">
             
             <!-- Video / Audio Switcher -->
@@ -641,7 +513,7 @@
                 
                 <div class="input-holder">
                     <i class="fa-solid fa-link input-icon"></i>
-                    <input type="url" name="url" id="urlInput" class="url-box" placeholder="Paste Instagram Reel link here..." required autocomplete="off">
+                    <input type="url" name="url" id="urlInput" class="url-box" placeholder="Paste Reel link here..." required autocomplete="off">
                     
                     <!-- 1-Tap Cut & Paste Buttons -->
                     <div class="btn-tray">
@@ -654,74 +526,74 @@
                     </div>
                 </div>
 
-                <!-- Live Instagram Detection Tag -->
+                <!-- Link Status -->
                 <div class="link-status" id="linkStatus">
-                    <i class="fa-solid fa-circle-check"></i> <span>Instagram Reel Link Ready!</span>
+                    <i class="fa-solid fa-circle-check"></i> <span>Reel link ready!</span>
                 </div>
 
-                <button type="submit" class="btn-download-fire" id="fireBtn">
-                    <i class="fa-solid fa-cloud-arrow-down"></i> DOWNLOAD NOW
+                <button type="submit" class="btn-download-clean" id="fireBtn">
+                    <i class="fa-solid fa-arrow-down"></i> Download
                 </button>
             </form>
 
-            <!-- Holographic Radar Spinner -->
+            <!-- Loader -->
             <div id="loading-view">
                 <div class="radar-spinner">
-                    <i class="fa-solid fa-cloud-arrow-down fa-fade" style="font-size: 1.7rem; color: #dc2743;"></i>
+                    <i class="fa-solid fa-arrow-down fa-fade" style="font-size: 1.4rem; color: #dc2743;"></i>
                 </div>
-                <div class="loader-title" id="loaderTitle">Connecting to Instagram...</div>
-                <div class="loader-desc">Fetching original full quality video. Download starts in seconds!</div>
+                <div class="loader-title">Downloading Reel...</div>
+                <div class="loader-desc">Original quality video is being saved to your device.</div>
                 <button type="button" class="btn-reset-form" onclick="resetDownloader()">
-                    <i class="fa-solid fa-rotate-left"></i> Download Another Reel
+                    <i class="fa-solid fa-rotate-left"></i> Download Another
                 </button>
             </div>
         </div>
 
-        <!-- 3 Simple Features -->
+        <!-- Features -->
         <div class="features-row">
             <div class="feat-card">
-                <div class="feat-icon-box"><i class="fa-solid fa-bolt-lightning"></i></div>
-                <div class="feat-title">Super Fast</div>
-                <div class="feat-text">High-speed cloud processing. No waiting, instant direct download.</div>
+                <div class="feat-icon-box"><i class="fa-solid fa-bolt"></i></div>
+                <div class="feat-title">Fast</div>
+                <div class="feat-text">Instant direct download to your phone.</div>
             </div>
             <div class="feat-card">
-                <div class="feat-icon-box"><i class="fa-solid fa-gem"></i></div>
+                <div class="feat-icon-box"><i class="fa-solid fa-check"></i></div>
                 <div class="feat-title">Original Quality</div>
-                <div class="feat-text">Get original 1080p full resolution video and crisp clear audio.</div>
+                <div class="feat-text">High-resolution video and clear audio.</div>
             </div>
             <div class="feat-card">
-                <div class="feat-icon-box"><i class="fa-solid fa-shield-halved"></i></div>
-                <div class="feat-title">100% Free & Safe</div>
-                <div class="feat-text">No login required, no spammy ads. Clean and safe downloads.</div>
+                <div class="feat-icon-box"><i class="fa-solid fa-shield"></i></div>
+                <div class="feat-title">100% Free</div>
+                <div class="feat-text">No signup, no limits, completely safe.</div>
             </div>
         </div>
 
-        <!-- Simple FAQs -->
+        <!-- FAQs -->
         <div class="faq-box">
-            <h3 class="faq-head">Frequently Asked Questions</h3>
+            <h3 class="faq-head">Questions & Answers</h3>
             
             <div class="faq-row" onclick="toggleFaqRow(this)">
                 <div class="faq-q">
-                    <span>Is NexLoad really free?</span>
+                    <span>Is NexLoad completely free?</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
-                <div class="faq-a">Yes, NexLoad is 100% free with unlimited downloads. You don't need to pay anything or create an account.</div>
+                <div class="faq-a">Yes, NexLoad is 100% free with unlimited downloads. You don't need an account.</div>
             </div>
 
             <div class="faq-row" onclick="toggleFaqRow(this)">
                 <div class="faq-q">
-                    <span>Where are the downloaded reels saved?</span>
+                    <span>Where is the downloaded reel saved?</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
-                <div class="faq-a">Videos are saved directly to your phone's Gallery / Photos or your computer's "Downloads" folder.</div>
+                <div class="faq-a">Videos are saved directly to your phone's Gallery / Photos or Downloads folder.</div>
             </div>
 
             <div class="faq-row" onclick="toggleFaqRow(this)">
                 <div class="faq-q">
-                    <span>Can I download only MP3 audio from a reel?</span>
+                    <span>Can I download only MP3 audio?</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
-                <div class="faq-a">Yes! Just select the "Audio Only (MP3)" tab above, paste the link, and download the trending audio directly.</div>
+                <div class="faq-a">Yes! Switch to the "Audio Only (MP3)" tab above to download just the sound.</div>
             </div>
         </div>
     </main>
@@ -736,7 +608,7 @@
                 <span style="color: rgba(255,255,255,0.15)">•</span>
                 <a class="footer-link" onclick="openLegal('contactModal')">Contact Us</a>
             </div>
-            <p class="copy-text">© 2026 NexLoad. Made for creators and everyday users.</p>
+            <p class="copy-text">© 2026 NexLoad</p>
         </div>
     </footer>
 
@@ -745,11 +617,10 @@
         <div class="modal-card">
             <button class="modal-exit-btn" onclick="closeLegal('privacyModal')"><i class="fa-solid fa-xmark"></i></button>
             <h3 class="modal-header-title">Privacy Policy</h3>
-            <p class="modal-body-text"><strong>Last Updated:</strong> 2026</p>
-            <p class="modal-body-text">Welcome to <strong>NexLoad</strong> (https://nexload.online). Your privacy is extremely important to us.</p>
-            <p class="modal-body-text"><strong>1. No Data Stored:</strong> We do not collect, save, or track your personal details, passwords, or downloaded media. Everything is processed directly in real-time memory.</p>
-            <p class="modal-body-text"><strong>2. Safe & Private:</strong> You can download reels without logging in or providing any personal information.</p>
-            <p class="modal-body-text"><strong>3. Cookies:</strong> We only use a temporary technical cookie (<code>download_done</code>) to automatically reset the download button once your file starts saving.</p>
+            <p class="modal-body-text">Welcome to <strong>NexLoad</strong> (https://nexload.online).</p>
+            <p class="modal-body-text"><strong>1. No Data Saved:</strong> We do not collect or store your personal details, passwords, or downloaded reels.</p>
+            <p class="modal-body-text"><strong>2. Privacy:</strong> You can download reels completely anonymously without logging in.</p>
+            <p class="modal-body-text"><strong>3. Cookies:</strong> A temporary technical cookie (<code>download_done</code>) is used only to reset the form once your download starts.</p>
         </div>
     </div>
 
@@ -758,33 +629,31 @@
         <div class="modal-card">
             <button class="modal-exit-btn" onclick="closeLegal('termsModal')"><i class="fa-solid fa-xmark"></i></button>
             <h3 class="modal-header-title">Terms of Service</h3>
-            <p class="modal-body-text">By using <strong>NexLoad</strong>, you agree to these simple terms:</p>
-            <p class="modal-body-text"><strong>1. Personal Use:</strong> NexLoad is designed for personal backup and offline viewing. Users are responsible for respecting content creators' copyrights.</p>
-            <p class="modal-body-text"><strong>2. No Hosting:</strong> NexLoad does not host or store any media files on its servers. It only helps users save publicly accessible content.</p>
+            <p class="modal-body-text">By using NexLoad, you agree to these terms:</p>
+            <p class="modal-body-text"><strong>1. Personal Use:</strong> NexLoad is intended for personal offline viewing. Please respect content creators' copyrights.</p>
+            <p class="modal-body-text"><strong>2. No Hosting:</strong> NexLoad does not host or store media on its servers.</p>
         </div>
     </div>
 
-    <!-- Contact Support Modal -->
+    <!-- Contact Modal -->
     <div class="modal-bg" id="contactModal">
         <div class="modal-card">
             <button class="modal-exit-btn" onclick="closeLegal('contactModal')"><i class="fa-solid fa-xmark"></i></button>
             <h3 class="modal-header-title">Contact Us</h3>
-            <p class="modal-body-text">Have questions, feedback, or need help with a download?</p>
-            <p class="modal-body-text">Email us directly at:</p>
-            <p class="modal-body-text" style="color: #f09433; font-weight: 700; font-size: 1.05rem;">
+            <p class="modal-body-text">Questions or feedback? Email us at:</p>
+            <p class="modal-body-text" style="color: #f09433; font-weight: 700; font-size: 1rem;">
                 <i class="fa-regular fa-envelope me-2"></i> support@nexload.online
             </p>
         </div>
     </div>
 
-    <!-- Core Interactive JavaScript -->
+    <!-- Interactive JavaScript -->
     <script>
         const urlInput = document.getElementById('urlInput');
         const cutBtn = document.getElementById('cutBtn');
         const linkStatus = document.getElementById('linkStatus');
         const form = document.getElementById('dlForm');
         const loadingView = document.getElementById('loading-view');
-        const loaderTitle = document.getElementById('loaderTitle');
 
         // Show/Hide Cut Button & Detection Tag
         urlInput.addEventListener('input', function() {
@@ -802,7 +671,7 @@
             }
         });
 
-        // 1-Tap Cut / Clear Button
+        // 1-Tap Cut / Clear
         function clearUrl() {
             urlInput.value = '';
             cutBtn.style.display = 'none';
@@ -810,7 +679,7 @@
             urlInput.focus();
         }
 
-        // 1-Tap Clipboard Paste Button
+        // 1-Tap Clipboard Paste
         async function pasteReelLink() {
             try {
                 const text = await navigator.clipboard.readText();
@@ -826,27 +695,21 @@
             }
         }
 
-        // Video / Audio Switcher
+        // Switch MP4 / MP3
         function setMode(mode, btn) {
             document.getElementById('formatField').value = mode;
             document.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         }
 
-        // Form Submit & Download Sequence
+        // Form Submit
         form.onsubmit = function() {
             form.style.display = 'none';
             linkStatus.style.display = 'none';
             loadingView.style.display = 'block';
-            loaderTitle.innerText = "Connecting to Instagram...";
 
-            setTimeout(() => { loaderTitle.innerText = "Extracting Full HD Video..."; }, 1400);
-            setTimeout(() => { loaderTitle.innerText = "Download Starting..."; }, 3200);
-
-            // Clean cookie
             document.cookie = "download_done=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
-            // Auto-detect when download finishes
             const doneCheck = setInterval(function() {
                 if (document.cookie.indexOf('download_done=yes') !== -1) {
                     clearInterval(doneCheck);
