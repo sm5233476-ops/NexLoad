@@ -2,489 +2,813 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexLoad — Instagram Reels & Video Downloader</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NexLoad — Ultimate High-Speed Media Downloader</title>
     
-    <!-- 1. Google Search Console Verification -->
+    <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="-VzraoSDqAsfmqMbDd7E-etkM2dSOuYPgcTAcMhXk8k" />
     
-    <!-- 2. SEO & WhatsApp / Social Sharing Previews -->
-    <meta name="description" content="Download Instagram Reels, Videos, and Audio in original 1080p high quality in 1-tap. Fast, free, unlimited and no annoying ads.">
-    <meta property="og:title" content="NexLoad — 1-Tap Instagram Reels Downloader">
-    <meta property="og:description" content="Download Instagram Reels, Videos & Audio in original high quality. Fast, Free, No Ads.">
+    <!-- SEO & Social Meta Tags -->
+    <meta name="description" content="Download Instagram Reels, Videos & Audio in original Ultra HD quality with zero ads. Free, unlimited, one-tap downloader.">
+    <meta property="og:title" content="NexLoad — Ultra Fast Media Downloader">
+    <meta property="og:description" content="Original 1080p/4K Quality, Zero Watermark, No Ads. One-tap instant downloader.">
     <meta property="og:url" content="https://nexload.online">
     <meta property="og:type" content="website">
 
-    <!-- 3. Official NexLoad Logo in Browser Tab (Favicon) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23f09433'/><stop offset='50%25' stop-color='%23dc2743'/><stop offset='100%25' stop-color='%23bc1888'/></linearGradient></defs><rect width='100' height='100' rx='26' fill='url(%23g)'/><path d='M50 24 L50 58 M36 46 L50 60 L64 46 M30 74 L70 74' stroke='white' stroke-width='9' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>">
-    
-    <!-- Google Fonts & Icons -->
+    <!-- Official Futuristic Logo (Favicon) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%2300f2fe'/><stop offset='50%25' stop-color='%239d4edd'/><stop offset='100%25' stop-color='%23ff007f'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='%2306070d'/><rect x='2' y='2' width='96' height='96' rx='26' stroke='url(%23g)' stroke-width='4' fill='none'/><path d='M50 22 L50 60 M34 46 L50 62 L66 46 M28 76 L72 76' stroke='url(%23g)' stroke-width='8' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>">
+
+    <!-- Google Fonts & FontAwesome Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         :root {
-            --bg-dark: #090a0f;
-            --card-bg: rgba(18, 20, 29, 0.75);
-            --border-glow: rgba(255, 255, 255, 0.08);
-            --ig-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            --btn-glow: 0 10px 30px rgba(220, 39, 67, 0.4);
+            --bg-void: #030407;
+            --surface-card: rgba(13, 16, 27, 0.72);
+            --surface-card-hover: rgba(18, 23, 38, 0.85);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(0, 242, 254, 0.25);
+            --accent-cyan: #00f2fe;
+            --accent-purple: #7928ca;
+            --accent-pink: #ff0080;
+            --gradient-cosmic: linear-gradient(135deg, #00f2fe 0%, #7928ca 50%, #ff0080 100%);
+            --gradient-sunset: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            --btn-shadow: 0 12px 35px -8px rgba(255, 0, 128, 0.55);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         
-        html {
-            overflow-x: hidden;
-        }
-
         body {
-            background-color: var(--bg-dark);
+            background-color: var(--bg-void);
             color: #ffffff;
             min-height: 100vh;
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
         }
 
-        .blob-1 {
-            position: absolute;
-            top: -150px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: min(600px, 100vw);
-            height: 600px;
-            background: radial-gradient(circle, rgba(225, 48, 108, 0.25) 0%, rgba(0,0,0,0) 70%);
-            filter: blur(80px);
+        /* Ambient Dynamic Glow Orbs */
+        .ambient-glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
             z-index: -1;
             pointer-events: none;
+            opacity: 0.38;
+            animation: pulse-float 14s ease-in-out infinite alternate;
         }
-        .blob-2 {
-            position: absolute;
-            bottom: 10%;
-            right: 0;
-            width: min(450px, 100vw);
-            height: 450px;
-            background: radial-gradient(circle, rgba(131, 58, 180, 0.2) 0%, rgba(0,0,0,0) 70%);
-            filter: blur(80px);
+        .glow-1 {
+            width: 650px; height: 650px;
+            top: -200px; left: 50%;
+            transform: translateX(-50%);
+            background: radial-gradient(circle, #7928ca 0%, #ff0080 50%, transparent 70%);
+        }
+        .glow-2 {
+            width: 500px; height: 500px;
+            bottom: 5%; right: -100px;
+            background: radial-gradient(circle, #00f2fe 0%, #7928ca 60%, transparent 70%);
+            animation-delay: -5s;
+        }
+        .glow-3 {
+            width: 450px; height: 450px;
+            top: 35%; left: -120px;
+            background: radial-gradient(circle, #dc2743 0%, transparent 70%);
+            animation-delay: -9s;
+        }
+        @keyframes pulse-float {
+            0% { transform: translate(-50%, 0) scale(1); }
+            50% { transform: translate(-45%, 50px) scale(1.08); }
+            100% { transform: translate(-55%, -30px) scale(0.95); }
+        }
+
+        /* Subtle Grid Overlay */
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 45px 45px;
             z-index: -1;
             pointer-events: none;
         }
 
+        /* Top Navigation */
         header {
             padding: 24px 20px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
+            max-width: 1100px;
+            width: 92%;
+            margin: 0 auto;
         }
-        .logo-container {
+        .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             text-decoration: none;
         }
-        .logo-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
-            background: var(--ig-gradient);
+        .brand-icon {
+            width: 46px; height: 46px;
+            border-radius: 16px;
+            background: var(--gradient-sunset);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 22px;
             color: white;
-            box-shadow: 0 8px 20px rgba(225, 48, 108, 0.35);
+            box-shadow: 0 8px 24px rgba(220, 39, 67, 0.45);
+            position: relative;
+            transition: transform 0.3s ease;
         }
-        .logo-title {
-            font-size: 1.8rem;
+        .brand-icon::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 18px;
+            background: var(--gradient-cosmic);
+            z-index: -1;
+            filter: blur(8px);
+            opacity: 0.6;
+        }
+        .brand:hover .brand-icon { transform: rotate(5deg) scale(1.06); }
+
+        .brand-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.85rem;
             font-weight: 800;
             letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #ffffff 40%, #a5b4fc 100%);
+            background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
+        .status-badge {
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid rgba(0, 242, 254, 0.25);
+            color: var(--accent-cyan);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            letter-spacing: 0.3px;
+        }
+        .status-dot {
+            width: 8px; height: 8px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-cyan);
+            animation: pulse-dot 1.5s infinite;
+        }
+        @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } }
+
+        /* Main Container */
         main {
             max-width: 680px;
             width: 92%;
-            margin: 10px auto 50px auto;
+            margin: 20px auto 60px auto;
             text-align: center;
         }
 
-        .badge-pill {
+        /* Hero Text */
+        .hero-pill {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 6px 16px;
+            gap: 9px;
+            padding: 7px 18px;
             border-radius: 50px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 0, 128, 0.08);
+            border: 1px solid rgba(255, 0, 128, 0.25);
+            color: #ff4da6;
             font-size: 0.8rem;
-            font-weight: 600;
-            color: #f472b6;
-            margin-bottom: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 22px;
             backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.15);
         }
 
         h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            letter-spacing: -1px;
-            margin-bottom: 12px;
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -1.2px;
+            margin-bottom: 15px;
         }
-        .highlight {
-            background: var(--ig-gradient);
+        .gradient-text {
+            background: var(--gradient-sunset);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
         }
         .subtitle {
             color: #94a3b8;
-            font-size: 1rem;
-            margin-bottom: 35px;
+            font-size: 1.05rem;
+            font-weight: 400;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .glass-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(24px);
-            border: 1px solid var(--border-glow);
-            border-radius: 28px;
-            padding: 36px 30px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+        /* Glassmorphic Downloader Card */
+        .downloader-card {
+            background: var(--surface-card);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 32px;
+            padding: 40px 32px;
+            box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.7),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
             position: relative;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .downloader-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
-        .format-selector {
+        /* Mode Selector Toggle */
+        .mode-toggle {
             display: flex;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 16px;
-            padding: 5px;
-            margin-bottom: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(5, 7, 13, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 18px;
+            padding: 6px;
+            margin-bottom: 26px;
+            gap: 6px;
         }
-        .format-btn {
+        .mode-btn {
             flex: 1;
-            padding: 12px;
+            padding: 13px;
             border: none;
             background: transparent;
             color: #94a3b8;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.95rem;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 9px;
         }
-        .format-btn.active {
-            background: rgba(255, 255, 255, 0.1);
+        .mode-btn.active {
+            background: rgba(255, 255, 255, 0.08);
             color: #ffffff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
         }
 
-        .input-box-wrapper {
+        /* Interactive Input Bar with Smart Actions */
+        .input-wrapper {
             position: relative;
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
-        .input-field {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1.5px solid rgba(255, 255, 255, 0.1);
-            padding: 18px 58px 18px 48px;
-            border-radius: 18px;
-            color: white;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-        .input-field:focus {
-            border-color: #dc2743;
-            box-shadow: 0 0 25px rgba(220, 39, 67, 0.35);
-        }
-        .input-field::placeholder { color: #64748b; font-size: 0.95rem; }
-        .input-icon {
+        .input-icon-left {
             position: absolute;
-            left: 18px;
+            left: 20px;
+            font-size: 1.2rem;
             color: #64748b;
-            font-size: 1.1rem;
+            pointer-events: none;
+            transition: color 0.3s ease;
         }
+        .main-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            border: 1.8px solid rgba(255, 255, 255, 0.08);
+            padding: 20px 105px 20px 52px;
+            border-radius: 20px;
+            color: #ffffff;
+            font-size: 1.02rem;
+            font-weight: 500;
+            outline: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .main-input::placeholder { color: #526177; font-size: 0.98rem; }
+        .main-input:focus {
+            border-color: #ff0080;
+            background: rgba(3, 4, 8, 0.75);
+            box-shadow: 0 0 35px rgba(255, 0, 128, 0.3);
+        }
+        .main-input:focus ~ .input-icon-left { color: #ff0080; }
 
-        /* नया कॉम्पैक्ट 2-in-1 Action Button (Paste & Clear) */
-        .action-btn {
+        /* Action Buttons Inside Input */
+        .input-actions {
             position: absolute;
             right: 8px;
-            width: 42px;
-            height: 42px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #f1f5f9;
-            border-radius: 14px;
-            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        /* 1-Tap Cut / Clear Button */
+        .btn-clear {
+            width: 38px; height: 38px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            display: none; /* dynamically displayed when input has text */
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
-        .action-btn:hover {
-            background: rgba(255, 255, 255, 0.18);
-            color: white;
+        .btn-clear:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.4);
             transform: scale(1.05);
         }
-        .action-btn:active {
-            transform: scale(0.95);
+
+        /* 1-Tap Paste Button */
+        .btn-paste {
+            padding: 10px 16px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            font-size: 0.86rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+        .btn-paste:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.02);
         }
 
-        .submit-btn {
+        /* Download Submit Button */
+        .btn-download-glow {
             width: 100%;
-            background: var(--ig-gradient);
+            background: var(--gradient-sunset);
             border: none;
-            color: white;
-            padding: 18px;
-            border-radius: 18px;
-            font-size: 1.1rem;
-            font-weight: 700;
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 20px;
+            font-size: 1.12rem;
+            font-weight: 800;
             letter-spacing: 0.5px;
             cursor: pointer;
-            box-shadow: var(--btn-glow);
-            transition: all 0.3s ease;
+            box-shadow: var(--btn-shadow);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
         }
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(220, 39, 67, 0.6);
+        .btn-download-glow::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            transform: skewX(-25deg);
+            transition: 0.75s;
         }
-        .submit-btn:active { transform: scale(0.98); }
+        .btn-download-glow:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 18px 45px -5px rgba(220, 39, 67, 0.65);
+        }
+        .btn-download-glow:hover::before { left: 160%; }
+        .btn-download-glow:active { transform: scale(0.98); }
 
-        #loading-area {
+        /* High-Tech Animated Radar Loader */
+        #radar-loader {
             display: none;
-            padding: 20px 0 10px 0;
+            padding: 30px 10px 15px 10px;
+            text-align: center;
         }
-        .custom-spinner {
-            width: 52px;
-            height: 52px;
-            margin: 0 auto 18px auto;
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top: 4px solid #dc2743;
+        .radar-box {
+            width: 70px; height: 70px;
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+            margin: 0 auto 20px auto;
+            position: relative;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, transparent 70%);
+            border: 2px solid rgba(0, 242, 254, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .radar-box::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--accent-pink);
+            border-right-color: var(--accent-cyan);
+            animation: spin 0.9s cubic-bezier(0.5, 0, 0.5, 1) infinite;
         }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        .loading-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
-        .loading-sub { font-size: 0.85rem; color: #94a3b8; }
-        .reset-link {
-            display: inline-block;
-            margin-top: 18px;
+
+        .radar-title { font-size: 1.25rem; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.3px; }
+        .radar-sub { font-size: 0.9rem; color: #94a3b8; }
+
+        .btn-cancel {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 22px;
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: #cbd5e1;
-            padding: 8px 20px;
-            border-radius: 30px;
+            padding: 9px 22px;
+            border-radius: 50px;
             font-size: 0.85rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.2s ease;
         }
-        .reset-link:hover { background: rgba(255, 255, 255, 0.1); color: white; }
+        .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+        }
 
+        /* Feature Cards Grid */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-top: 50px;
+            gap: 18px;
+            margin-top: 55px;
         }
-        .feat-box {
-            background: rgba(255, 255, 255, 0.03);
+        .card-feat {
+            background: rgba(255, 255, 255, 0.025);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 20px;
-            padding: 24px 16px;
-            text-align: center;
+            border-radius: 24px;
+            padding: 28px 20px;
+            transition: all 0.3s ease;
         }
-        .feat-icon {
-            font-size: 1.6rem;
-            margin-bottom: 12px;
-            background: var(--ig-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .card-feat:hover {
+            background: rgba(255, 255, 255, 0.045);
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-4px);
         }
-        .feat-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
-        .feat-desc { font-size: 0.8rem; color: #64748b; line-height: 1.4; }
+        .feat-icon-wrap {
+            width: 48px; height: 48px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin: 0 auto 16px auto;
+            color: var(--accent-cyan);
+        }
+        .card-feat:nth-child(2) .feat-icon-wrap { color: #ff4da6; }
+        .card-feat:nth-child(3) .feat-icon-wrap { color: #38ef7d; }
+        
+        .feat-heading { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
+        .feat-p { font-size: 0.82rem; color: #64748b; line-height: 1.5; font-weight: 500; }
 
+        /* Footer & Legal Links */
         footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 40px 20px;
             text-align: center;
-            padding: 30px 20px;
-            color: #475569;
-            font-size: 0.85rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
         }
+        .footer-content {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        .footer-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 18px;
+        }
+        .footer-link {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            cursor: pointer;
+        }
+        .footer-link:hover { color: var(--accent-cyan); }
+        .copyright { color: #475569; font-size: 0.8rem; font-weight: 500; }
 
-        @media (max-width: 600px) {
-            h1 { font-size: 1.9rem; }
-            .glass-card { padding: 26px 18px; border-radius: 24px; }
-            .features-grid { grid-template-columns: 1fr; }
-            .input-field { padding: 16px 52px 16px 42px; font-size: 0.95rem; }
-            .action-btn { width: 38px; height: 38px; font-size: 0.95rem; right: 7px; }
-            .submit-btn { padding: 16px; font-size: 1rem; }
+        /* Legal Modals (Privacy & Terms) */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(16px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-body-box {
+            background: #0d111d;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 26px;
+            padding: 35px 30px;
+            max-width: 580px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            text-align: left;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+        }
+        .modal-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 18px; color: #ffffff; }
+        .modal-text { font-size: 0.88rem; line-height: 1.7; color: #94a3b8; margin-bottom: 16px; }
+        .btn-modal-close {
+            position: absolute;
+            top: 22px; right: 22px;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .btn-modal-close:hover { background: rgba(239, 68, 68, 0.25); color: #ef4444; }
+
+        /* Responsive Mobile Layout */
+        @media (max-width: 650px) {
+            h1 { font-size: 2.1rem; }
+            .downloader-card { padding: 30px 18px; border-radius: 26px; }
+            .features-grid { grid-template-columns: 1fr; gap: 12px; }
+            .main-input { padding: 18px 90px 18px 45px; font-size: 0.95rem; }
+            .btn-download-glow { padding: 17px; font-size: 1.05rem; }
+            .brand-title { font-size: 1.5rem; }
+            .footer-links { gap: 16px; flex-wrap: wrap; }
         }
     </style>
 </head>
 <body>
 
-    <div class="blob-1"></div>
-    <div class="blob-2"></div>
+    <!-- Dynamic Background Ambient Blobs -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+    <div class="grid-bg"></div>
 
+    <!-- Header -->
     <header>
-        <a href="/" class="logo-container">
-            <div class="logo-icon"><i class="fa-brands fa-instagram"></i></div>
-            <span class="logo-title">NexLoad</span>
+        <a href="/" class="brand">
+            <div class="brand-icon"><i class="fa-solid fa-bolt"></i></div>
+            <span class="brand-title">NexLoad</span>
         </a>
+        <div class="status-badge">
+            <div class="status-dot"></div>
+            <span>FAST CDN ACTIVE</span>
+        </div>
     </header>
 
+    <!-- Main Section -->
     <main>
-        <div class="badge-pill">
-            <i class="fa-solid fa-bolt"></i> 100% Free • Unlimited • Original Quality
+        <div class="hero-pill">
+            <i class="fa-solid fa-shield-halved"></i> 100% Free • Unlimited • Ad-Free
         </div>
         
-        <h1>Download Instagram <br><span class="highlight">Reels, Videos & Audio</span></h1>
-        <p class="subtitle">Fastest high-speed video saver. No watermark, no signup.</p>
+        <h1>Save Media in <br><span class="gradient-text">Original Ultra HD</span></h1>
+        <p class="subtitle">Fastest high-speed reels & video saver. Direct download without compression or watermarks.</p>
 
-        <div class="glass-card">
-            <!-- Format Selector -->
-            <div class="format-selector">
-                <button type="button" class="format-btn active" onclick="setFormat('mp4', this)">
+        <!-- Glassmorphism Card -->
+        <div class="downloader-card">
+            
+            <!-- Format Switcher -->
+            <div class="mode-toggle">
+                <button type="button" class="mode-btn active" onclick="switchFormat('mp4', this)">
                     <i class="fa-solid fa-film"></i> Video (MP4)
                 </button>
-                <button type="button" class="format-btn" onclick="setFormat('mp3', this)">
+                <button type="button" class="mode-btn" onclick="switchFormat('mp3', this)">
                     <i class="fa-solid fa-music"></i> Audio Only (MP3)
                 </button>
             </div>
 
-            <!-- Form -->
-            <form action="/download" method="post" id="dlForm">
+            <!-- Downloader Form -->
+            <form action="/download" method="post" id="mediaForm">
                 <input type="hidden" name="format" id="formatInput" value="mp4">
                 
-                <div class="input-box-wrapper">
-                    <i class="fa-solid fa-link input-icon"></i>
-                    <input type="url" name="url" id="urlInput" class="input-field" placeholder="Paste Instagram link here..." required autocomplete="off" oninput="toggleActionBtn()">
-                    <!-- Compact Toggle Button (Paste or Clear) -->
-                    <button type="button" class="action-btn" id="actionBtn" onclick="handleActionBtn()" title="Paste from clipboard">
-                        <i class="fa-regular fa-paste" id="actionIcon"></i>
-                    </button>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-link input-icon-left"></i>
+                    <input type="url" name="url" id="linkInput" class="main-input" placeholder="Paste link here..." required autocomplete="off">
+                    
+                    <!-- Action Buttons Inside Bar -->
+                    <div class="input-actions">
+                        <button type="button" class="btn-clear" id="clearBtn" onclick="clearInput()" title="Clear link">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                        <button type="button" class="btn-paste" onclick="pasteFromClipboard()">
+                            <i class="fa-regular fa-clipboard"></i> Paste
+                        </button>
+                    </div>
                 </div>
 
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    <i class="fa-solid fa-cloud-arrow-down"></i> Download Now
+                <button type="submit" class="btn-download-glow" id="submitBtn">
+                    <i class="fa-solid fa-cloud-arrow-down"></i> START DOWNLOAD
                 </button>
             </form>
 
-            <!-- Loading Spinner -->
-            <div id="loading-area">
-                <div class="custom-spinner"></div>
-                <div class="loading-title">Extracting Best Quality...</div>
-                <div class="loading-sub">Your download will start in your browser in seconds.</div>
-                <button type="button" class="reset-link" onclick="resetForm()">
-                    <i class="fa-solid fa-rotate-left"></i> Download Another
+            <!-- Holographic Radar Loader -->
+            <div id="radar-loader">
+                <div class="radar-box">
+                    <i class="fa-solid fa-cloud-arrow-down fa-fade" style="font-size: 1.8rem; color: var(--accent-cyan);"></i>
+                </div>
+                <div class="radar-title" id="loaderMsg">Connecting to Stream...</div>
+                <div class="radar-sub">Processing media at ultra-fast speeds. Your download starts shortly.</div>
+                <button type="button" class="btn-cancel" onclick="resetUI()">
+                    <i class="fa-solid fa-rotate-left"></i> Download Another Video
                 </button>
             </div>
         </div>
 
+        <!-- 3 Feature Boxes -->
         <div class="features-grid">
-            <div class="feat-box">
-                <div class="feat-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
-                <div class="feat-title">Lightning Fast</div>
-                <div class="feat-desc">Direct high-speed downloads processed right on dedicated cloud servers.</div>
+            <div class="card-feat">
+                <div class="feat-icon-wrap"><i class="fa-solid fa-bolt-lightning"></i></div>
+                <div class="feat-heading">Lightning Fast</div>
+                <div class="feat-p">Direct streaming pipeline guarantees downloads without server-side lag.</div>
             </div>
-            <div class="feat-box">
-                <div class="feat-icon"><i class="fa-solid fa-circle-check"></i></div>
-                <div class="feat-title">Original Quality</div>
-                <div class="feat-desc">Get the highest 1080p full resolution MP4 with crystal clear audio.</div>
+            <div class="card-feat">
+                <div class="feat-icon-wrap"><i class="fa-solid fa-gem"></i></div>
+                <div class="feat-heading">Original Quality</div>
+                <div class="feat-p">Preserves maximum available 1080p full bitrate video and crystal 320kbps audio.</div>
             </div>
-            <div class="feat-box">
-                <div class="feat-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <div class="feat-title">100% Safe & Free</div>
-                <div class="feat-desc">No login required, no annoying full-page popup ads. Just clean downloads.</div>
+            <div class="card-feat">
+                <div class="feat-icon-wrap"><i class="fa-solid fa-user-shield"></i></div>
+                <div class="feat-heading">100% Private</div>
+                <div class="feat-p">No account required, no logs stored, and zero full-page spammy popups.</div>
             </div>
         </div>
     </main>
 
+    <!-- Footer with Legal Links -->
     <footer>
-        <p>© 2026 NexLoad. Built for creators & editors.</p>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a class="footer-link" onclick="openModal('privacyModal')">Privacy Policy</a>
+                <span style="color: rgba(255,255,255,0.15)">•</span>
+                <a class="footer-link" onclick="openModal('termsModal')">Terms of Service</a>
+                <span style="color: rgba(255,255,255,0.15)">•</span>
+                <a class="footer-link" onclick="openModal('contactModal')">Contact Support</a>
+            </div>
+            <p class="copyright">© 2026 NexLoad. Built for high-speed creator workflows.</p>
+        </div>
     </footer>
 
+    <!-- Privacy Policy Modal -->
+    <div class="modal-overlay" id="privacyModal">
+        <div class="modal-body-box">
+            <button class="btn-modal-close" onclick="closeModal('privacyModal')"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="modal-title">Privacy Policy</h3>
+            <p class="modal-text"><strong>Effective Date:</strong> 2026</p>
+            <p class="modal-text">At <strong>NexLoad</strong> (https://nexload.online), accessible to all users globally, one of our main priorities is the privacy of our visitors. This Privacy Policy document outlines the types of information collected and how it is protected.</p>
+            <p class="modal-text"><strong>1. Data Collection:</strong> NexLoad does NOT collect, store, or share any personal user information, account passwords, or identity details. All media requests are processed in volatile memory and are purged immediately after serving.</p>
+            <p class="modal-text"><strong>2. Log Files:</strong> Standard server logs record anonymous technical metadata (e.g. IP address, browser type, timestamps) exclusively to maintain server health, defend against DDoS attacks, and optimize speed.</p>
+            <p class="modal-text"><strong>3. Cookies:</strong> A temporary functional cookie (<code>download_done</code>) is used solely to notify your browser when a file download is finished so the user interface can reset automatically. No tracking cookies are used.</p>
+        </div>
+    </div>
+
+    <!-- Terms of Service Modal -->
+    <div class="modal-overlay" id="termsModal">
+        <div class="modal-body-box">
+            <button class="btn-modal-close" onclick="closeModal('termsModal')"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="modal-title">Terms of Service</h3>
+            <p class="modal-text">Welcome to <strong>NexLoad</strong>. By accessing and using our website, you agree to comply with and be bound by the following terms.</p>
+            <p class="modal-text"><strong>1. Personal Use Only:</strong> NexLoad is designed for personal, educational, and fair-use backup purposes. Users are strictly responsible for respecting the copyright and intellectual property rights of the respective content owners.</p>
+            <p class="modal-text"><strong>2. No Warranty:</strong> The service is provided "as-is" without warranties of any kind. We do not host any copyrighted material on our servers; our engine acts strictly as a web proxy client for publicly accessible content.</p>
+            <p class="modal-text"><strong>3. Limitation of Liability:</strong> NexLoad and its operators shall not be held liable for any misuse of the tool or infringement of third-party terms by end users.</p>
+        </div>
+    </div>
+
+    <!-- Contact Support Modal -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-body-box">
+            <button class="btn-modal-close" onclick="closeModal('contactModal')"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="modal-title">Contact & Support</h3>
+            <p class="modal-text">Need help, have suggestions, or want to report an issue with a download?</p>
+            <p class="modal-text">Reach out to our core team directly at:</p>
+            <p class="modal-text" style="color: var(--accent-cyan); font-weight: 700; font-size: 1.05rem;">
+                <i class="fa-regular fa-envelope me-2"></i> support@nexload.online
+            </p>
+            <p class="modal-text">We usually review and resolve all user queries within 24 to 48 hours.</p>
+        </div>
+    </div>
+
+    <!-- Core Interactive Scripts -->
     <script>
-        function setFormat(type, btn) {
+        const linkInput = document.getElementById('linkInput');
+        const clearBtn = document.getElementById('clearBtn');
+        const form = document.getElementById('mediaForm');
+        const loader = document.getElementById('radar-loader');
+        const loaderMsg = document.getElementById('loaderMsg');
+
+        // Dynamic Show/Hide of Clear ("X") Button
+        linkInput.addEventListener('input', function() {
+            if (this.value.trim().length > 0) {
+                clearBtn.style.display = 'flex';
+            } else {
+                clearBtn.style.display = 'none';
+            }
+        });
+
+        // 1-Tap Cut / Clear Button
+        function clearInput() {
+            linkInput.value = '';
+            clearBtn.style.display = 'none';
+            linkInput.focus();
+        }
+
+        // 1-Tap Clipboard Paste Button
+        async function pasteFromClipboard() {
+            try {
+                const text = await navigator.clipboard.readText();
+                if (text && text.trim().length > 0) {
+                    linkInput.value = text.trim();
+                    clearBtn.style.display = 'flex';
+                }
+            } catch (err) {
+                alert("Please allow clipboard permission in your browser or paste manually.");
+            }
+        }
+
+        // Format Switcher
+        function switchFormat(type, btn) {
             document.getElementById('formatInput').value = type;
-            document.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         }
 
-        const urlInput = document.getElementById('urlInput');
-        const actionBtn = document.getElementById('actionBtn');
-        const actionIcon = document.getElementById('actionIcon');
-
-        // इनपुट में टेक्स्ट होते ही आइकन को X (Cut) में बदलना
-        function toggleActionBtn() {
-            if (urlInput.value.trim().length > 0) {
-                actionIcon.className = "fa-solid fa-xmark";
-                actionBtn.title = "Clear link";
-            } else {
-                actionIcon.className = "fa-regular fa-paste";
-                actionBtn.title = "Paste from clipboard";
-            }
-        }
-
-        // पेस्ट और कट दोनों को एक बटन से हैंडल करना
-        async function handleActionBtn() {
-            if (urlInput.value.trim().length > 0) {
-                // अगर टेक्स्ट है तो कट (Clear) कर दो
-                urlInput.value = '';
-                toggleActionBtn();
-                urlInput.focus();
-            } else {
-                // अगर खाली है तो क्लिपबोर्ड से पेस्ट कर दो
-                try {
-                    const text = await navigator.clipboard.readText();
-                    if (text) {
-                        urlInput.value = text.trim();
-                        toggleActionBtn();
-                    }
-                } catch (err) {
-                    alert("Please allow clipboard permission or paste manually.");
-                }
-            }
-        }
-
-        const form = document.getElementById('dlForm');
-        const loading = document.getElementById('loading-area');
-
+        // Handle Download & Real-Time Status Animation
         form.onsubmit = function() {
             form.style.display = 'none';
-            loading.style.display = 'block';
+            loader.style.display = 'block';
+            loaderMsg.innerText = "Connecting to Stream...";
 
+            setTimeout(() => { loaderMsg.innerText = "Extracting Highest Resolution..."; }, 1500);
+            setTimeout(() => { loaderMsg.innerText = "Packaging Media Stream..."; }, 4000);
+
+            // Clean cookie before new trigger
             document.cookie = "download_done=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
-            const timer = setInterval(() => {
+            // Check every 500ms if server delivered file
+            const checkDoneTimer = setInterval(function() {
                 if (document.cookie.indexOf('download_done=yes') !== -1) {
-                    clearInterval(timer);
+                    clearInterval(checkDoneTimer);
                     document.cookie = "download_done=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                    resetForm();
+                    resetUI();
                 }
             }, 500);
         };
 
-        function resetForm() {
+        function resetUI() {
             form.style.display = 'block';
-            loading.style.display = 'none';
-            toggleActionBtn();
+            loader.style.display = 'none';
+            linkInput.value = '';
+            clearBtn.style.display = 'none';
+        }
+
+        // Modals Management
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+        }
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.style.display = 'none';
+            }
         }
     </script>
+
+    <!-- User's Existing Assistant Widget -->
+    <script src="https://alwayson-assistant.vercel.app/widget.js" data-business-id="nexload-online-233"></script>
 </body>
 </html>
