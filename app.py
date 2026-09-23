@@ -4,11 +4,11 @@ import os
 
 app = Flask(__name__)
 
-DOWNLOAD_FOLDER = 'downloads'
+DOWNLOAD_FOLDER = os.path.abspath('downloads')
 if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
 
-# Render server par FFmpeg ka path
+# FFmpeg Path
 ffmpeg_dir = os.path.abspath('./ffmpeg_bin/bin')
 if os.path.exists(ffmpeg_dir):
     os.environ['PATH'] = f"{ffmpeg_dir}:{os.environ.get('PATH', '')}"
@@ -23,13 +23,13 @@ def download_video():
     format_type = request.form.get('format', 'mp4')
 
     if not video_url:
-        return "Please provide a valid Instagram link."
+        return "Please provide a valid link."
 
     ffmpeg_loc = './ffmpeg_bin/bin' if os.path.exists('./ffmpeg_bin/bin') else None
 
-    # VAHI SIMPLE AUR WORKING INSTAGRAM ENGINE:
+    # Clean & Direct Engine (uses video ID to avoid filename crashes)
     ydl_opts = {
-        'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s',
+        'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(id)s.%(ext)s'),
         'format': 'best',
         'quiet': True,
         'noplaylist': True,
@@ -51,23 +51,21 @@ def download_video():
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(video_url, download=True)
-            filename = ydl.prepare_filename(info)
+            video_id = info.get('id', 'video')
 
-            base, ext = os.path.splitext(filename)
             if format_type == 'mp3':
-                final_filename = base + '.mp3'
+                final_file = os.path.join(DOWNLOAD_FOLDER, f"{video_id}.mp3")
+                out_name = f"NexLoad_{video_id}.mp3"
             else:
-                final_filename = base + '.mp4'
+                final_file = os.path.join(DOWNLOAD_FOLDER, f"{video_id}.mp4")
+                out_name = f"NexLoad_{video_id}.mp4"
 
-            if os.path.exists(filename) and filename != final_filename:
-                os.rename(filename, final_filename)
-
-        resp = make_response(send_file(final_filename, as_attachment=True))
+        resp = make_response(send_file(final_file, as_attachment=True, download_name=out_name))
         resp.set_cookie('download_done', 'yes', path='/')
         return resp
 
     except Exception as e:
-        return f"NexLoad Error: Could not download this specific reel (It might be private or audio-restricted). Try any public reel!"
+        return f"NexLoad Error: {str(e)}"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
