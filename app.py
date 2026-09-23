@@ -8,8 +8,10 @@ DOWNLOAD_FOLDER = 'downloads'
 if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
 
-# कुकीज़ फ़ाइल का पक्का पाथ
-COOKIE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cookies.txt')
+# Render server par FFmpeg aur FFprobe ka rasta set karein
+ffmpeg_dir = os.path.abspath('./ffmpeg_bin/bin')
+if os.path.exists(ffmpeg_dir):
+    os.environ['PATH'] = f"{ffmpeg_dir}:{os.environ.get('PATH', '')}"
 
 @app.route('/')
 def index():
@@ -21,23 +23,20 @@ def download_video():
     format_type = request.form.get('format', 'mp4')
 
     if not video_url:
-        return "Please provide a valid video link."
+        return "Please provide a valid Instagram link."
+
+    ffmpeg_loc = './ffmpeg_bin/bin' if os.path.exists('./ffmpeg_bin/bin') else None
 
     ydl_opts = {
-        'outtmpl': f'{DOWNLOAD_FOLDER}/%(id)s.%(ext)s',
+        'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s',
         'format': 'best',
         'quiet': True,
-        'no_warnings': True,
         'noplaylist': True,
-        'http_headers': {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-            'Accept-Language': 'en-US,en;q=0.9',
-        }
     }
-
-    # कुकीज़ जोड़ना (यही सबसे ज़रूरी चीज़ मिस थी)
-    if os.path.exists(COOKIE_FILE):
-        ydl_opts['cookiefile'] = COOKIE_FILE
+    
+    # FFmpeg & FFprobe location explicitly provide karein
+    if ffmpeg_loc:
+        ydl_opts['ffmpeg_location'] = ffmpeg_loc
 
     if format_type == 'mp3':
         ydl_opts.update({
@@ -71,5 +70,4 @@ def download_video():
         return f"NexLoad Error: {str(e)}"
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=5000)
