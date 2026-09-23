@@ -15,8 +15,8 @@
     <meta property="og:url" content="https://nexload.online">
     <meta property="og:type" content="website">
 
-    <!-- Official Unified Glowing Favicon (Matching Logo) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='nl' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23f09433'/><stop offset='30%25' stop-color='%23e6683c'/><stop offset='60%25' stop-color='%23dc2743'/><stop offset='100%25' stop-color='%23cc2366'/></linearGradient></defs><rect width='100' height='100' rx='26' fill='%23080a12'/><rect x='2' y='2' width='96' height='96' rx='24' stroke='url(%23nl)' stroke-width='4' fill='none'/><path d='M32 70 V30 L52 54 V30 M70 30 V58 M58 48 L70 60 L82 48' stroke='url(%23nl)' stroke-width='8.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>">
+    <!-- Official Unified Vibrant Favicon (Bold White Icon + Sunset Gradient BG) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%23f09433'/><stop offset='30%25' stop-color='%23e6683c'/><stop offset='65%25' stop-color='%23dc2743'/><stop offset='100%25' stop-color='%23bc1888'/></linearGradient></defs><rect width='100' height='100' rx='28' fill='url(%23bg)'/><path d='M25 74 V26 L49 54 V26 M75 26 V56 M61 42 L75 56 L89 42' stroke='%23ffffff' stroke-width='10.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>">
 
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,18 +26,19 @@
 
     <style>
         :root {
-            --bg-deep: #05060d;
-            --card-glass: rgba(14, 18, 32, 0.84);
-            --sunset-grad: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            --fire-glow: rgba(220, 39, 67, 0.45);
-            --cyan-glow: #00f2fe;
+            --bg-void: #05060c;
+            --card-glass: rgba(14, 18, 32, 0.85);
+            --sunset-gradient: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            --fire-accent: #dc2743;
+            --orange-accent: #f09433;
+            --pink-accent: #ff007f;
             --border-glow: rgba(255, 255, 255, 0.12);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         
         body {
-            background-color: var(--bg-deep);
+            background-color: var(--bg-void);
             color: #ffffff;
             min-height: 100vh;
             overflow-x: hidden;
@@ -47,94 +48,94 @@
             position: relative;
         }
 
-        /* Fluid Animated Neon Aurora Flow (Heavy Ambient Glow) */
-        .neon-aurora-bg {
+        /* 60FPS Hardware-Accelerated Liquid Aurora Flow (NO BOX GRID) */
+        .aurora-viewport {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: -1;
             pointer-events: none;
             overflow: hidden;
+            transform: translateZ(0);
         }
-        .aurora-stream-1 {
+        .liquid-wave-1 {
             position: absolute;
-            top: -20%; left: 50%;
-            transform: translateX(-50%);
-            width: 700px; height: 500px;
-            background: radial-gradient(ellipse at center, rgba(220, 39, 67, 0.32) 0%, rgba(188, 24, 136, 0.18) 45%, transparent 70%);
+            top: -25%; left: 50%;
+            transform: translateX(-50%) translateZ(0);
+            width: 140%; height: 75%;
+            background: radial-gradient(ellipse at 50% 35%, rgba(220, 39, 67, 0.38) 0%, rgba(188, 24, 136, 0.22) 42%, transparent 70%);
+            filter: blur(90px);
+            will-change: transform;
+            animation: liquid-dance-1 9s ease-in-out infinite alternate;
+        }
+        .liquid-wave-2 {
+            position: absolute;
+            bottom: -20%; right: -20%;
+            width: 130%; height: 70%;
+            background: radial-gradient(ellipse at 50% 65%, rgba(240, 148, 51, 0.3) 0%, rgba(220, 39, 67, 0.22) 45%, transparent 72%);
             filter: blur(100px);
-            animation: flow-pulse 8s ease-in-out infinite alternate;
+            will-change: transform;
+            animation: liquid-dance-2 13s ease-in-out infinite alternate-reverse;
         }
-        .aurora-stream-2 {
+        .liquid-wave-3 {
             position: absolute;
-            bottom: -15%; right: -15%;
-            width: 600px; height: 450px;
-            background: radial-gradient(ellipse at center, rgba(0, 242, 254, 0.22) 0%, rgba(121, 40, 202, 0.2) 40%, transparent 70%);
-            filter: blur(110px);
-            animation: flow-pulse 11s ease-in-out infinite alternate-reverse;
-        }
-        .aurora-stream-3 {
-            position: absolute;
-            top: 40%; left: -15%;
-            width: 450px; height: 400px;
-            background: radial-gradient(ellipse at center, rgba(240, 148, 51, 0.2) 0%, transparent 70%);
+            top: 35%; left: -25%;
+            width: 90%; height: 60%;
+            background: radial-gradient(ellipse at center, rgba(121, 40, 202, 0.26) 0%, rgba(255, 0, 127, 0.18) 50%, transparent 70%);
             filter: blur(95px);
-            animation: flow-pulse 9s ease-in-out infinite alternate;
+            will-change: transform;
+            animation: liquid-dance-1 11s ease-in-out infinite alternate-reverse;
         }
-        @keyframes flow-pulse {
-            0% { transform: scale(1) translateY(0); opacity: 0.85; }
-            50% { transform: scale(1.1) translateY(25px); opacity: 1; }
-            100% { transform: scale(0.95) translateY(-20px); opacity: 0.75; }
+        @keyframes liquid-dance-1 {
+            0% { transform: translate(-50%, 0) scale(1); }
+            50% { transform: translate(-48%, 35px) scale(1.08); }
+            100% { transform: translate(-52%, -25px) scale(0.96); }
         }
-
-        /* Cyberpunk Perspective Micro-Grid */
-        .cyber-grid {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
-            background-size: 36px 36px;
-            z-index: -2;
-            pointer-events: none;
+        @keyframes liquid-dance-2 {
+            0% { transform: scale(1) translate(0, 0); }
+            50% { transform: scale(1.1) translate(-30px, 30px); }
+            100% { transform: scale(0.95) translate(25px, -20px); }
         }
 
-        /* Header Navbar - 100% CENTERED AS REQUESTED */
+        /* Centered Header Navigation */
         header {
-            padding: 24px 20px 10px 20px;
+            padding: 26px 20px 12px 20px;
             max-width: 900px;
             width: 100%;
             margin: 0 auto;
             display: flex;
             align-items: center;
-            justify-content: center; /* Perfectly Centered */
+            justify-content: center;
             text-align: center;
         }
-        .brand-center-link {
+        .brand-link {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 13px;
             text-decoration: none;
-            transition: transform 0.25s ease;
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .brand-center-link:hover { transform: scale(1.04); }
+        .brand-link:hover { transform: scale(1.04); }
+
+        /* Unified Sunset Gradient Logo Box */
         .logo-box {
-            width: 42px; height: 42px;
-            background: #080a12;
-            border: 1.5px solid rgba(220, 39, 67, 0.55);
-            border-radius: 13px;
+            width: 44px; height: 44px;
+            background: var(--sunset-gradient);
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 24px rgba(220, 39, 67, 0.5), 0 0 45px rgba(240, 148, 51, 0.25);
-            animation: glow-breathe 4s infinite alternate;
+            box-shadow: 0 0 25px rgba(220, 39, 67, 0.6), 0 0 45px rgba(240, 148, 51, 0.35);
+            animation: logo-glow 3.5s ease-in-out infinite alternate;
+            position: relative;
         }
-        @keyframes glow-breathe {
-            0% { box-shadow: 0 0 20px rgba(220, 39, 67, 0.45); }
-            100% { box-shadow: 0 0 35px rgba(220, 39, 67, 0.75), 0 0 50px rgba(240, 148, 51, 0.35); }
+        @keyframes logo-glow {
+            0% { box-shadow: 0 0 22px rgba(220, 39, 67, 0.55); }
+            100% { box-shadow: 0 0 38px rgba(220, 39, 67, 0.85), 0 0 55px rgba(240, 148, 51, 0.5); }
         }
         .logo-text {
-            font-size: 1.8rem;
+            font-size: 1.85rem;
             font-weight: 900;
             letter-spacing: -0.6px;
             background: linear-gradient(135deg, #ffffff 40%, #fed7aa 100%);
@@ -150,9 +151,9 @@
             text-align: center;
         }
 
-        /* Simple Punchy Headline */
+        /* Clean Punchy Headline */
         h1 {
-            font-size: 2.3rem;
+            font-size: 2.35rem;
             font-weight: 900;
             line-height: 1.2;
             letter-spacing: -0.8px;
@@ -160,11 +161,15 @@
             color: #ffffff;
         }
         .fire-text {
-            background: var(--sunset-grad);
+            background: var(--sunset-gradient);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 35px rgba(220, 39, 67, 0.55);
+            text-shadow: 0 0 40px rgba(220, 39, 67, 0.6);
+            animation: textShine 4s linear infinite;
         }
+        @keyframes textShine { to { background-position: 200% center; } }
+
         .clean-sub {
             color: #94a3b8;
             font-size: 0.98rem;
@@ -172,22 +177,22 @@
             font-weight: 500;
         }
 
-        /* Glowing Glass Card */
+        /* High-Glow Frosted Card */
         .glass-card {
             background: var(--card-glass);
-            backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border: 1.5px solid var(--border-glow);
             border-radius: 26px;
             padding: 30px 22px;
             box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85),
-                        0 0 50px rgba(220, 39, 67, 0.22);
+                        0 0 55px rgba(220, 39, 67, 0.25);
             transition: all 0.3s ease;
         }
         .glass-card:hover {
             border-color: rgba(255, 255, 255, 0.22);
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9),
-                        0 0 65px rgba(220, 39, 67, 0.35);
+                        0 0 70px rgba(220, 39, 67, 0.35);
         }
 
         /* Format Tabs (Video / Audio) */
@@ -219,7 +224,7 @@
         .format-btn.active {
             background: rgba(255, 255, 255, 0.1);
             color: #ffffff;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 255, 255, 0.12);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 22px rgba(255, 255, 255, 0.14);
         }
 
         /* Input Bar */
@@ -251,10 +256,10 @@
         }
         .url-box::placeholder { color: #526177; font-size: 0.92rem; }
         .url-box:focus {
-            border-color: #dc2743;
-            box-shadow: 0 0 30px rgba(220, 39, 67, 0.45);
+            border-color: var(--fire-accent);
+            box-shadow: 0 0 32px rgba(220, 39, 67, 0.45);
         }
-        .url-box:focus ~ .input-icon { color: #dc2743; }
+        .url-box:focus ~ .input-icon { color: var(--fire-accent); }
 
         /* Paste & Cut Buttons */
         .btn-tray {
@@ -320,7 +325,7 @@
         /* High-Glow Fire Download Button */
         .btn-download-fire {
             width: 100%;
-            background: var(--sunset-grad);
+            background: var(--sunset-gradient);
             border: none;
             color: #ffffff;
             padding: 18px;
@@ -329,7 +334,7 @@
             font-weight: 900;
             letter-spacing: 0.5px;
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(220, 39, 67, 0.6), 0 0 25px rgba(240, 148, 51, 0.3);
+            box-shadow: 0 10px 32px rgba(220, 39, 67, 0.65), 0 0 28px rgba(240, 148, 51, 0.35);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -337,18 +342,23 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            animation: btn-pulse 3s infinite;
+        }
+        @keyframes btn-pulse {
+            0%, 100% { box-shadow: 0 10px 32px rgba(220, 39, 67, 0.65), 0 0 28px rgba(240, 148, 51, 0.35); }
+            50% { box-shadow: 0 14px 45px rgba(220, 39, 67, 0.9), 0 0 50px rgba(240, 148, 51, 0.55); }
         }
         .btn-download-fire::before {
             content: '';
             position: absolute;
             top: 0; left: -100%; width: 60%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.38), transparent);
             transform: skewX(-25deg);
             transition: 0.75s;
         }
         .btn-download-fire:hover {
             transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 16px 42px rgba(220, 39, 67, 0.8), 0 0 45px rgba(240, 148, 51, 0.5);
+            box-shadow: 0 16px 45px rgba(220, 39, 67, 0.85), 0 0 45px rgba(240, 148, 51, 0.6);
         }
         .btn-download-fire:hover::before { left: 160%; }
         .btn-download-fire:active { transform: scale(0.98); }
@@ -364,8 +374,8 @@
             border-radius: 50%;
             margin: 0 auto 16px auto;
             position: relative;
-            background: radial-gradient(circle, rgba(220, 39, 67, 0.2) 0%, transparent 70%);
-            border: 2px solid rgba(220, 39, 67, 0.3);
+            background: radial-gradient(circle, rgba(220, 39, 67, 0.22) 0%, transparent 70%);
+            border: 2px solid rgba(220, 39, 67, 0.35);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -402,7 +412,7 @@
         }
         .btn-reset-form:hover { background: rgba(255, 255, 255, 0.1); color: #ffffff; }
 
-        /* 3 Clean Glowing Feature Cards */
+        /* Feature Cards */
         .features-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -549,28 +559,20 @@
 </head>
 <body>
 
-    <!-- Fluid Neon Aurora Ambient Glow (Pulsing Smoothly, No Childish Bubbles!) -->
-    <div class="neon-aurora-bg">
-        <div class="aurora-stream-1"></div>
-        <div class="aurora-stream-2"></div>
-        <div class="aurora-stream-3"></div>
+    <!-- 60FPS Fluid Liquid Aurora Flow (Continuous, No Box Grid!) -->
+    <div class="aurora-viewport">
+        <div class="liquid-wave-1"></div>
+        <div class="liquid-wave-2"></div>
+        <div class="liquid-wave-3"></div>
     </div>
-    <div class="cyber-grid"></div>
 
     <!-- Centered Header Navigation -->
     <header>
-        <a href="/" class="brand-center-link">
+        <a href="/" class="brand-link">
+            <!-- Radiant Sunset Gradient Logo with Bold White Monogram -->
             <div class="logo-box">
-                <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="headerNl" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#f09433"/>
-                            <stop offset="30%" stop-color="#e6683c"/>
-                            <stop offset="60%" stop-color="#dc2743"/>
-                            <stop offset="100%" stop-color="#cc2366"/>
-                        </linearGradient>
-                    </defs>
-                    <path d="M32 70 V30 L52 54 V30 M70 30 V58 M58 48 L70 60 L82 48" stroke="url(#headerNl)" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg width="25" height="25" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M25 74 V26 L49 54 V26 M75 26 V56 M61 42 L75 56 L89 42" stroke="#ffffff" stroke-width="10.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
             <span class="logo-text">NexLoad</span>
