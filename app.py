@@ -8,7 +8,7 @@ DOWNLOAD_FOLDER = os.path.abspath('downloads')
 if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
 
-# FFmpeg Path
+# FFmpeg Path (Render ke liye)
 ffmpeg_dir = os.path.abspath('./ffmpeg_bin/bin')
 if os.path.exists(ffmpeg_dir):
     os.environ['PATH'] = f"{ffmpeg_dir}:{os.environ.get('PATH', '')}"
@@ -23,11 +23,10 @@ def download_video():
     format_type = request.form.get('format', 'mp4')
 
     if not video_url:
-        return "Please provide a valid link."
+        return "Please provide a valid Instagram link."
 
     ffmpeg_loc = './ffmpeg_bin/bin' if os.path.exists('./ffmpeg_bin/bin') else None
 
-    # Clean & Direct Engine (uses video ID to avoid filename crashes)
     ydl_opts = {
         'outtmpl': os.path.join(DOWNLOAD_FOLDER, '%(id)s.%(ext)s'),
         'format': 'best',
